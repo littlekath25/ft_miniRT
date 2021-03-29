@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 15:39:09 by katherine     ########   odam.nl         */
+/*   Updated: 2021/03/29 16:44:34 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphe
 	{
 		impact->rgb = object->colors;
 		impact->object_pos = object->pos;
-		impact->color = ft_shade_object(ray, impact, camera);
 	}
 }

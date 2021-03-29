@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:05:00 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 14:20:25 by katherine     ########   odam.nl         */
+/*   Updated: 2021/03/29 15:34:20 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_vector	ft_subtract(t_vector v1, t_vector v2)
 	t_vector	new;
 	
 	new.x = v1.x - v2.x;
-	new.y = v2.y - v2.y;
-	new.z = v2.z - v2.z;
+	new.y = v1.y - v2.y;
+	new.z = v1.z - v2.z;
 	return (new);
 }
 

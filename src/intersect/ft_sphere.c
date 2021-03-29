@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 15:18:54 by katherine     ########   odam.nl         */
+/*   Updated: 2021/03/29 15:39:09 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ static int		ft_solve_quadratic(double a, double b, double c, t_impact *impact)
 {
 	double	disc;
 	double	t_near;
-    double  second;
+	double  second;
 
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
 		return (0);
 	if (disc == 0)
-        t_near = -b / (2 * a);
+		t_near = -b / (2 * a);
 	if (disc > 0)
 	{
 		t_near = (-b  + sqrt(disc)) / (2 * a);
 		second = (-b  - sqrt(disc)) / (2 * a);
-		if (second < t_near && second > 0)
+		if (second < t_near && second > RAY_MIN)
 			t_near = second;
 	}
-	if (t_near < impact->near && t_near > 0)
+	if (t_near < impact->near && t_near > RAY_MIN)
 	{
 		impact->near = t_near;
 		return (1);

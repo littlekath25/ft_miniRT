@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 16:56:16 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/02 13:35:54 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_impact	*ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_s
 			ft_intersect_sphere(ray, impact, camera, (t_sphere *)obj_ptr->content);
 		obj_ptr = obj_ptr->next;
 	}
-	impact->color = ft_shade_object(ray, impact, scene);
+	if (impact->intersect == 1)
+		impact->color = ft_shade_object(ray, impact, scene);
 	return (impact);
 }
 

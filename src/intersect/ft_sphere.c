@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 16:44:34 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/02 13:41:42 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphe
 	c = ft_dot_product(len, len) - pow(object->diameter, 2);
 	if (ft_solve_quadratic(a, b, c, impact))
 	{
+		impact->hitpoint = ft_hitpoint(ray->dir, ray->dir, impact->near);
 		impact->rgb = object->colors;
 		impact->object_pos = object->pos;
+		impact->intersect = 1;
 	}
 }

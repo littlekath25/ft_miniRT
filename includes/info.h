@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/29 15:34:46 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/02 13:35:34 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,12 @@ typedef struct s_ray
 
 typedef struct s_impact
 {
+	int			intersect;
 	double		near;
 	float		angle;
 	int			color;
 	t_colors	rgb;
 	t_vector	hitpoint;
-	t_vector	normal;
 	t_vector	object_pos;
 }	t_impact;
 

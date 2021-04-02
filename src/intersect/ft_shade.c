@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 16:57:07 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/02 14:31:55 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)
 {
-	double		refl;
 	int			color;
-	t_light		*light;
+	t_vector	norm;
+	t_vector	light;
+	t_light		*light_ptr;
+	double		dot;
 
-	refl = 1.0;
-	color = 0;
-	light = (t_light *)scene->light->content;
-	impact->hitpoint = ft_new_vector(light->pos.x + impact->near * ray->dir.x, light->pos.y + impact->near * ray->dir.y, light->pos.z + impact->near * ray->dir.z);
-	impact->normal = ft_new_vector(impact->hitpoint.x - impact->object_pos.x, impact->hitpoint.y - impact->object_pos.y, impact->hitpoint.z - impact->object_pos.z);
-	ft_normalize(&impact->normal);
-	refl = -ft_dot_product(ray->dir, impact->normal);
-	color = ft_create_trgb(1, impact->rgb.r * refl, impact->rgb.g * refl, impact->rgb.b * refl);
+	light_ptr = (t_light *)scene->light->content;
+	norm = ft_subtract(impact->hitpoint, impact->object_pos);
+	light = ft_subtract(light_ptr->pos, impact->object_pos);
+	ft_normalize(&norm);
+	ft_normalize(&light);
+	dot = -ft_dot_product(norm, light);
+	color = ft_create_trgb(light_ptr->ratio, impact->rgb.r * dot, impact->rgb.g * dot, impact->rgb.b * dot);
 	return (color);
 }

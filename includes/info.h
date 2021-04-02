@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/02 13:35:34 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/02 16:03:22 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ typedef enum e_obj
 
 typedef struct s_colors
 {
-	int	r;
-	int	g;
-	int	b;
+	float	r;
+	float	g;
+	float	b;
 }	t_colors;
 
 typedef struct s_vector

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 14:15:19 by katherine     #+#    #+#                 */
-/*   Updated: 2021/03/29 15:20:56 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/02 17:17:28 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ static t_vector	ft_get_direction(int w, int h, t_vector dir, t_camera *camera, t
 	double	ratio;
 	double	fov;
 
-	fov = tan((double)camera->fov / 2 * M_PI / 180);
-	ratio = (double)scene->width / scene->height;
-	dir.x = ((double)w / scene->width) - camera->pos.x - 0.5;
-	dir.y = ((double)h / scene->height) - camera->pos.y - 0.5;
-	dir.z = (fov - camera->pos.z) * camera->ori.z;
-	dir.x *= ratio;
+	fov = (scene->width / 2) / (camera->fov / 2 * (M_PI / 180));
+	dir.x = ((double)w - (scene->width / 2)) - camera->pos.x - 0.5;
+	dir.y = ((double)scene->height / 2 - h) - camera->pos.y - 0.5;
+	dir.z = fov - camera->pos.z;
 	ft_normalize(&dir);
 	return (dir);
 }

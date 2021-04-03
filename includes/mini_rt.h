@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/29 16:43:35 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/03 14:28:06 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 
 /* Miscellaneous functions */
 int			ft_error_and_exit(int error, char *prefix);
-int			ft_create_trgb(int t, int r, int g, int b);
 int			key_hook(int keycode, t_mlx *window);
 t_mlx		*ft_init_mlx(t_scene *scene);
 t_img		*ft_init_img(t_img *image, t_mlx *window, t_scene *scene);
@@ -37,6 +36,12 @@ t_vector	ft_new_vector(double x, double y, double z);
 t_vector	ft_add_vector(t_vector v1, t_vector v2);
 t_vector	ft_copy_vector(t_vector copy);
 t_vector	ft_hitpoint(t_vector v1, t_vector v2, double t);
+
+/* Color functions */
+unsigned    ft_create_trgb(unsigned t, unsigned r, unsigned g, unsigned b);
+t_colors	ft_color_add(t_colors color1, t_colors color2);
+t_colors	ft_color_amb(t_colors color1, float ratio);
+t_colors	ft_color_mult(t_colors color1, t_colors color2);
 
 /* Vector functions */
 double		ft_dot_product(t_vector v1, t_vector v2);
@@ -76,7 +81,8 @@ int			ft_fill_orientation(char *orientation, t_vector *ori_ptr);
 void		ft_make_image(t_img *img, t_scene *scene);
 t_ray		*ft_generate_ray(t_ray *ray, int w, int h, t_scene *scene);
 t_impact	*ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene *scene);
-void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere *object);
 int			ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene);
+void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere *object);
+void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane *object);
 
 #endif

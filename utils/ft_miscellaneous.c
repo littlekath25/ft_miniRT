@@ -6,13 +6,13 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/29 14:05:25 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/03 11:58:07 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int	ft_create_trgb(int t, int r, int g, int b)
+unsigned	ft_create_trgb(unsigned t, unsigned r, unsigned g, unsigned b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }

@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/03/29 15:19:22 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/03 14:28:33 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ P_OBJ	=	$(P_SRC:%.c=$(P_PATH)%.o)
 
 I_SRC	=	ft_ray.c\
 			ft_intersect.c\
+			ft_shade.c\
 			ft_sphere.c\
-			ft_shade.c
+			ft_plane.c
 I_PATH	=	src/intersect/
 I_OBJ	=	$(I_SRC:%.c=$(I_PATH)%.o)
 
@@ -65,7 +66,8 @@ U_SRC	=	ft_error.c\
 			get_next_line.c\
 			ft_miscellaneous.c\
 			vector_math.c\
-			vector_math_2.c
+			vector_math_2.c\
+			ft_color.c
 U_PATH	=	utils/
 U_OBJ	=	$(U_SRC:%.c=$(U_PATH)%.o)
 

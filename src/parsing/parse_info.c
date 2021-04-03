@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:21:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/17 12:51:52 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/03 11:29:57 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_parse_ambient(t_scene *scene, char **splitted)
 		ft_error_and_exit(2, category);
 	scene->ambient.ratio = ft_atof(splitted[1]);
 	ft_fill_colors(splitted[2], &scene->ambient.colors);
+	scene->ambient.colors = ft_color_amb(scene->ambient.colors, scene->ambient.ratio);
 	ambient = 1;
 	return (1);
 }

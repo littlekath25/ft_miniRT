@@ -6,66 +6,54 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/02 16:55:23 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/03 12:19:05 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static t_colors	ft_color_add(t_colors color1, t_colors color2)
+static t_colors	ft_get_color(t_impact *impact, t_scene *scene, t_light *light, t_colors colors)
 {
-	color1.r += color2.r;
-	color1.g += color2.g;
-	color1.b += color2.b;
+	t_colors	tmp;
+	t_colors	light_color;
+	t_vector	object_normal;
+	t_vector	light_dir;
+	double		dot;
 	
-	if (color1.r > 255)
-		color1.r = 255;
-	if (color1.g > 255)
-		color1.g = 255;
-	if (color1.b > 255)
-		color1.b = 255;
-	return (color1);
-}
+	tmp = ft_color_mult(impact->rgb, scene->ambient.colors);
+	object_normal = ft_subtract(impact->hitpoint, impact->object_pos);
+	light_dir = ft_subtract(light->pos, impact->hitpoint);
+	ft_normalize(&object_normal);
+	ft_normalize(&light_dir);
+	dot = ft_dot_product(object_normal, light_dir);
+	if (dot < 0)
+		dot = 0;
+	light_color = ft_color_amb(light->colors, light->ratio * dot);
+	tmp = ft_color_add(tmp, ft_color_mult(impact->rgb, light_color));
+	colors = ft_color_add(colors, tmp);
+	return (colors);
+}	
 
-static t_colors	ft_color_amb(t_colors color1, float ratio)
+int		ft_shadow_ray()
 {
-	color1.r = color1.r * ratio;
-	color1.g = color1.g * ratio;
-	color1.b = color1.b * ratio;
-	return (color1);
-}
-
-static t_colors	ft_color_mult(t_colors color1, t_colors color2)
-{
-	color1.r = color1.r * color2.r / 255;
-	color1.g = color1.g * color2.g / 255;
-	color1.b = color1.b * color2.b / 255;
-	return (color1);
+	
 }
 
 int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)
 {
-	int			final;
-	t_colors	color;
-	t_colors	lightcolor;
-	t_colors	ambient;
-	t_vector	norm;
-	t_vector	light;
-	t_light		*light_ptr;
-	double		dot;
+	t_colors	colors;
+	unsigned	final;
+	t_list		*light_ptr;
 
-	ambient = ft_color_amb(scene->ambient.colors, scene->ambient.ratio);
-	color = ft_color_mult(impact->rgb, ambient);
-	light_ptr = (t_light *)scene->light->content;
-	norm = ft_subtract(impact->hitpoint, impact->object_pos);
-	light = ft_subtract(light_ptr->pos, impact->hitpoint);
-	ft_normalize(&norm);
-	ft_normalize(&light);
-	dot = ft_dot_product(norm, light);
-	if (dot < 0)
-		dot = 0;
-	lightcolor = ft_color_amb(light_ptr->colors, light_ptr->ratio * dot);
-	color = ft_color_add(color, ft_color_mult(impact->rgb, lightcolor));
-	final = ft_create_trgb(1, color.r, color.g, color.b);
+	light_ptr = (t_list *)scene->light;
+	while (light_ptr != NULL)
+	{
+		// if (ft_shadow_ray())
+		// 	printf("SHADOW!\n");
+		// else
+		colors = ft_get_color(impact, scene, (t_light *)light_ptr->content, colors);
+		light_ptr = light_ptr->next;
+	}
+	final = ft_create_trgb(1, colors.r, colors.g, colors.b);
 	return (final);
 }

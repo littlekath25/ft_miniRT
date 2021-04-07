@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 12:23:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 19:51:59 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 20:15:36 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane
 		{
 			impact->intersect = 1;
 			impact->near = t_near;
-			impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-			impact->rgb = plane->colors;
 			impact->normal = plane->normal;
+			impact->rgb = plane->colors;
+			impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
+			impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 19:48:57 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 20:15:21 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphe
 	{
 		impact->intersect = 1;
 		impact->near = t_near;
-		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-		impact->rgb = sphere->colors;
 		impact->normal = ft_subtract(impact->hitpoint, sphere->pos);
+		impact->rgb = sphere->colors;
+		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
+		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/07 19:47:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 20:16:10 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 21:17:05 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_camera *camera, t_tr
 		impact->intersect = 1;
 		impact->near = t_near;
 		impact->rgb = triangle->colors;
-		impact->normal = ft_subtract(impact->hitpoint, triangle->pos1);
+		impact->normal = ft_cross_product(ft_subtract(triangle->pos2, triangle->pos1), ft_subtract(triangle->pos3, triangle->pos1));
 		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
 		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}

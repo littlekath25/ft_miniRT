@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/02 16:03:22 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 19:19:30 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_plane
 	t_obj			identifier;
 	t_vector		pos;
 	t_colors		colors;
-	t_vector		ori;
+	t_vector		normal;
 }	t_plane;
 
 typedef struct s_square
@@ -85,7 +85,7 @@ typedef struct s_square
 	t_obj			identifier;
 	t_vector		pos;
 	t_colors		colors;
-	t_vector		ori;
+	t_vector		normal;
 	double			side;
 }	t_square;
 
@@ -94,7 +94,7 @@ typedef struct s_cylinder
 	t_obj				identifier;
 	t_vector			pos;
 	t_colors			colors;
-	t_vector			ori;
+	t_vector			normal;
 	double				diameter;
 	double				height;
 }	t_cylinder;
@@ -119,11 +119,9 @@ typedef struct s_impact
 {
 	int			intersect;
 	double		near;
-	float		angle;
-	int			color;
 	t_colors	rgb;
 	t_vector	hitpoint;
-	t_vector	object_pos;
+	t_vector	normal;
 }	t_impact;
 
 typedef struct s_mlx

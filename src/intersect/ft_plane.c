@@ -6,29 +6,29 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 12:23:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/03 18:45:50 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 19:51:59 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane *object)
+void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane *plane)
 {
 	double		denom;
 	double		t_near;
 	t_vector	ray_object;
 
-	denom = ft_dot_product(object->ori, ray->dir);
+	denom = ft_dot_product(plane->normal, ray->dir);
 	if (fabs(denom) > 0) {
-		ray_object = ft_subtract(object->pos, ray->pos);
-		t_near = ft_dot_product(ray_object, object->ori) / denom;
-		if (t_near > 1e-4 && t_near < impact->near)
+		ray_object = ft_subtract(plane->pos, ray->pos);
+		t_near = ft_dot_product(ray_object, plane->normal) / denom;
+		if (t_near > RAY_MIN && t_near < impact->near)
 		{
+			impact->intersect = 1;
 			impact->near = t_near;
 			impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-			impact->rgb = object->colors;
-			impact->object_pos = object->pos;
-			impact->intersect = 1;
+			impact->rgb = plane->colors;
+			impact->normal = plane->normal;
 		}
 	}
 }

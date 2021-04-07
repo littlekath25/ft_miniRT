@@ -6,18 +6,17 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/03 12:23:41 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 19:47:45 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-t_impact	*ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene *scene)
+int		ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene *scene)
 {
 	t_list		*obj_ptr;
 
 	obj_ptr = scene->objects;
-	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
 	impact->near = INFINITY;
 	while (obj_ptr)
 	{
@@ -25,11 +24,13 @@ t_impact	*ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_s
 			ft_intersect_sphere(ray, impact, camera, (t_sphere *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == PL)
 			ft_intersect_plane(ray, impact, camera, (t_plane *)obj_ptr->content);
+		if (*((t_obj *)(obj_ptr)->content) == TR)
+			ft_intersect_triangle(ray, impact, camera, (t_triangle *)obj_ptr->content);
 		obj_ptr = obj_ptr->next;
 	}
 	if (impact->intersect == 1)
-		impact->color = ft_shade_object(ray, impact, scene);
-	return (impact);
+		return (1);
+	return (0);
 }
 
 void	ft_make_image(t_img *img, t_scene *scene)
@@ -39,6 +40,7 @@ void	ft_make_image(t_img *img, t_scene *scene)
 	t_camera	*camera;
 	int			width;
 	int			height;
+	int			color;
 
 	width = 0;
 	height = 0;
@@ -51,8 +53,11 @@ void	ft_make_image(t_img *img, t_scene *scene)
 		while (width < scene->width)
 		{
 			ray = ft_generate_ray(ray, width, height, scene);
-			impact = ft_check_intersect(ray, impact, camera, scene);
-			my_mlx_pixel_put(img, width, height, impact->color);
+			if(ft_check_intersect(ray, impact, camera, scene))
+			{
+				color = ft_create_trgb(1, impact->rgb.r, impact->rgb.g, impact->rgb.b);
+				my_mlx_pixel_put(img, width, height, color);
+			}
 			width++;
 		}
 		height++;

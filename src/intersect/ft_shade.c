@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/03 12:19:05 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/07 19:31:14 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_colors	ft_get_color(t_impact *impact, t_scene *scene, t_light *light, t
 	double		dot;
 	
 	tmp = ft_color_mult(impact->rgb, scene->ambient.colors);
-	object_normal = ft_subtract(impact->hitpoint, impact->object_pos);
+	object_normal = impact->normal;
 	light_dir = ft_subtract(light->pos, impact->hitpoint);
 	ft_normalize(&object_normal);
 	ft_normalize(&light_dir);

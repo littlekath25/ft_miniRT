@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/08 12:29:34 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 15:10:10 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void		ft_normalize(t_vector *vec);
 t_vector	ft_subtract(t_vector v1, t_vector v2);
 t_vector	ft_add(t_vector v1, t_vector v2);
 t_vector	ft_scale(t_vector v1, double scalar);
+double		ft_distance(t_vector p1, t_vector p2);
 
 /* Error checking while parsing */
 int			ft_check_colors(char *colors);

@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 20:15:21 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 12:23:39 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static double		ft_solve(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere *sphere)
+static double		ft_solve(t_ray *ray, t_impact *impact, t_sphere *sphere)
 {
 	double		disc;
 	double		second;
@@ -22,7 +22,7 @@ static double		ft_solve(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere
 	double		c;
 	t_vector	len;
 
-	len = ft_subtract(camera->pos, sphere->pos);
+	len = ft_subtract(ray->pos, sphere->pos);
 	a = ft_dot_product(ray->dir, ray->dir);
 	b = 2 * ft_dot_product(ray->dir, len);
 	c = ft_dot_product(len, len) - pow(sphere->diameter, 2);
@@ -41,11 +41,11 @@ static double		ft_solve(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere
 	return (t_near);
 }
 
-void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere *sphere)
+void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
 {
 	double		t_near;
 
-	t_near = ft_solve(ray, impact, camera, sphere);
+	t_near = ft_solve(ray, impact, sphere);
 	if (t_near < impact->near && t_near > RAY_MIN)
 	{
 		impact->intersect = 1;

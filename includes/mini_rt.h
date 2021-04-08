@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/07 19:53:36 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 12:25:30 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ void		ft_make_image(t_img *img, t_scene *scene);
 t_ray		*ft_generate_ray(t_ray *ray, int w, int h, t_scene *scene);
 int		    ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene *scene);
 int			ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene);
-void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_camera *camera, t_sphere *sphere);
+void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere);
 void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane *plane);
-void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_camera *camera, t_triangle *triangle);
+void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_triangle *triangle);
+void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square);
 
 #endif

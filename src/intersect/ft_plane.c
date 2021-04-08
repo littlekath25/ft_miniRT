@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 12:23:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 20:15:36 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 12:24:41 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane
 	t_vector	ray_object;
 
 	denom = ft_dot_product(plane->normal, ray->dir);
-	if (fabs(denom) > 0) {
+	if (fabs(denom) > 0)
+	{
 		ray_object = ft_subtract(plane->pos, ray->pos);
 		t_near = ft_dot_product(ray_object, plane->normal) / denom;
 		if (t_near > RAY_MIN && t_near < impact->near)

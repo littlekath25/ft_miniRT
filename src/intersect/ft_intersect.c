@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 19:47:45 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 12:17:17 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene 
 			ft_intersect_plane(ray, impact, camera, (t_plane *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == TR)
 			ft_intersect_triangle(ray, impact, camera, (t_triangle *)obj_ptr->content);
+		// if (*((t_obj *)(obj_ptr)->content) == SQ)
+		// 	ft_intersect_square(ray, impact, camera, (t_square *)obj_ptr->content);
 		obj_ptr = obj_ptr->next;
 	}
 	if (impact->intersect == 1)

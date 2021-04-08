@@ -6,27 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/07 19:47:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 21:17:05 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 12:25:04 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_sphere.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: katherine <katherine@student.codam.nl>       +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/07 19:46:34 by katherine     ########   odam.nl         */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "mini_rt.h"
-
-static double		ft_solve(t_ray *ray, t_impact *impact, t_camera *camera, t_triangle *triangle)
+static double		ft_solve(t_ray *ray, t_impact *impact, t_triangle *triangle)
 {
 	t_vector	e1; 
 	t_vector	e2;
@@ -57,11 +43,11 @@ static double		ft_solve(t_ray *ray, t_impact *impact, t_camera *camera, t_triang
 	return (t_near);
 }
 
-void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_camera *camera, t_triangle *triangle)
+void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_triangle *triangle)
 {
 	double		t_near;
 
-	t_near = ft_solve(ray, impact, camera, triangle);
+	t_near = ft_solve(ray, impact, triangle);
 	if (t_near < impact->near && t_near > RAY_MIN)
 	{
 		impact->intersect = 1;

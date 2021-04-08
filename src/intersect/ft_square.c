@@ -33,12 +33,10 @@ static double	ft_solve(t_ray *ray, t_impact *impact, t_square *square)
 				return (INFINITY);
 			if (fabs(hit_point.z - square->pos.z) > (square->side / 2))
 				return (INFINITY);
-			else
-				return (t_near);
+			return (t_near);
 		}
-		else
-			return (INFINITY);
 	}
+	return (INFINITY);
 }
 
 void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
@@ -46,7 +44,7 @@ void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
 	double  t_near;
 
 	t_near = ft_solve(ray, impact, square);
-	if (t_near > RAY_MIN && t_near < impact->near)
+	if (t_near > RAY_MIN && t_near < impact->near && t_near != INFINITY)
 	{
 		impact->intersect = 1;
 		impact->near = t_near;

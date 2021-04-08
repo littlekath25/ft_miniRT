@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 15:58:05 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 23:41:49 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int		ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene 
 
 	obj_ptr = scene->objects;
 	impact->near = INFINITY;
+	impact->rgb.r = 0;
+	impact->rgb.g = 0;
+	impact->rgb.b = 0;
 	while (obj_ptr)
 	{
 		if (*((t_obj *)(obj_ptr)->content) == SP)

@@ -16,16 +16,16 @@ static double	ft_solve(t_ray *ray, t_impact *impact, t_square *square)
 {
 	double		denom;
 	t_vector	hit_point;
-	t_vector	ray_sq;
+	t_vector	ray_object;
 	double		t_near;
 
 	denom = ft_dot_product(square->normal, ray->dir);
 	if (fabs(denom) > RAY_MIN)
 	{
-		ray_sq = ft_subtract(square->pos, ray->pos);
-		t_near = ft_dot_product(ray_sq, square->normal) / denom;
+		ray_object = ft_subtract(square->pos, ray->pos);
+		t_near = ft_dot_product(ray_object, square->normal) / denom;
 		hit_point = ft_add(ray->pos, ft_scale(ray->dir, t_near));
-		if (t_near >= 0)
+		if (t_near > RAY_MIN)
 		{
 			if (fabs(hit_point.x - square->pos.x) > (square->side / 2))
 				return (INFINITY);

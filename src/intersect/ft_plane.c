@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 12:23:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 12:24:41 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/08 12:29:19 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_camera *camera, t_plane *plane)
+void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_plane *plane)
 {
 	double		denom;
 	double		t_near;

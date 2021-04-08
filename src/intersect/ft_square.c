@@ -91,25 +91,57 @@
 // 	return (t_near);
 // }
 
+static double       orient(t_vector a, t_vector b, t_vector c, t_vector n)
+{
+    t_vector ba;
+    t_vector ca;
+    t_vector cross;
+    double dot;
 
-// static double		ft_solve(ray, impact, square)
-// {
-// 	double	t_near;
-// 	return (t_near);
-// }
+    ba = ft_subtract(b, a);
+    ca = ft_subtract(c, a);
+    cross = ft_cross_product(ba, ca);
+    dot = ft_dot_product(cross, n);
+    return (dot);
+}
 
-// void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
-// {
-// 	double  t_near;
+static double		ft_solve(t_ray *ray, t_impact *impact, t_square *square)
+{
+    t_vector p[4];
+    t_plane *plane;
+    t_impact *impact_plane;
+    t_vector hitpoint;
+    double  o[4];
 
-// 	t_near = ft_solve(ray, impact, square);
-// 	if (t_near > RAY_MIN && t_near < impact->near)
-// 	{
-// 		impact->intersect = 1;
-// 		impact->near = t_near;
-// 		impact->normal = square->normal;
-// 		impact->rgb = square->colors;
-// 		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-// 		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
-// 	}
-// }
+    plane = (t_plane *)ft_calloc(sizeof(t_plane), 1);
+    impact_plane = (t_impact *)ft_calloc(sizeof(t_impact), 1);
+    plane->pos = square->pos;
+    plane->normal = square->normal;
+    ft_intersect_plane(ray, impact_plane, plane);
+    p[0] = ft_new_vector(square->pos.x - square->side / 2, square->pos.y + square->side / 2, square->pos.z);
+    p[1] = ft_new_vector(square->pos.x + square->side / 2, square->pos.y + square->side / 2, square->pos.z);
+    p[2] = ft_new_vector(square->pos.x + square->side / 2, square->pos.y - square->side / 2, square->pos.z);
+    p[3] = ft_new_vector(square->pos.x - square->side / 2, square->pos.y - square->side / 2, square->pos.z);
+
+    o[0] = orient(impact->hitpoint, p[0], p[1], square->normal);
+    o[1] = orient(impact->hitpoint, p[1], p[2], square->normal);
+    o[2] = orient(impact->hitpoint, p[2], p[3], square->normal);
+    o[3] = orient(impact->hitpoint, p[3], p[0], square->normal);
+    
+}
+
+void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
+{
+	double  t_near;
+
+	t_near = ft_solve(ray, impact, square);
+	if (t_near > RAY_MIN && t_near < impact->near)
+	{
+		impact->intersect = 1;
+		impact->near = t_near;
+		impact->normal = square->normal;
+		impact->rgb = square->colors;
+		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
+		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+	}
+}

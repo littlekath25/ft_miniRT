@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 12:23:39 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/10 20:07:10 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,24 @@
 
 static double		ft_solve(t_ray *ray, t_impact *impact, t_sphere *sphere)
 {
-	double		disc;
+	t_quad		quad;
 	double		second;
 	double		t_near;
-	double		a;
-	double		b;
-	double		c;
 	t_vector	len;
 
 	len = ft_subtract(ray->pos, sphere->pos);
-	a = ft_dot_product(ray->dir, ray->dir);
-	b = 2 * ft_dot_product(ray->dir, len);
-	c = ft_dot_product(len, len) - pow(sphere->diameter, 2);
-	disc = b * b - 4 * a * c;
-	if (disc < 0)
+	quad.a = ft_dot_product(ray->dir, ray->dir);
+	quad.b = 2 * ft_dot_product(ray->dir, len);
+	quad.c = ft_dot_product(len, len) - pow(sphere->diameter, 2);
+	quad.disc = quad.b * quad.b - 4 * quad.a * quad.c;
+	if (quad.disc < 0)
 		return (INFINITY);
-	if (disc == 0)
-		t_near = -b / (2 * a);
-	if (disc > 0)
+	if (quad.disc == 0)
+		t_near = -quad.b / (2 * quad.a);
+	if (quad.disc > 0)
 	{
-		t_near = (-b  + sqrt(disc)) / (2 * a);
-		second = (-b  - sqrt(disc)) / (2 * a);
+		t_near = (-quad.b  + sqrt(quad.disc)) / (2 * quad.a);
+		second = (-quad.b  - sqrt(quad.disc)) / (2 * quad.a);
 		if (second < t_near && second > RAY_MIN)
 			t_near = second;
 	}

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 23:41:49 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/11 17:35:52 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ int		ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene 
 
 	obj_ptr = scene->objects;
 	impact->near = INFINITY;
-	impact->rgb.r = 0;
-	impact->rgb.g = 0;
-	impact->rgb.b = 0;
+	impact->rgb = ft_reset_color(impact->rgb);
 	while (obj_ptr)
 	{
 		if (*((t_obj *)(obj_ptr)->content) == SP)
@@ -31,6 +29,8 @@ int		ft_check_intersect(t_ray *ray, t_impact *impact, t_camera *camera, t_scene 
 			ft_intersect_triangle(ray, impact, (t_triangle *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == SQ)
 			ft_intersect_square(ray, impact, (t_square *)obj_ptr->content);
+		if (*((t_obj *)(obj_ptr)->content) == CY)
+			ft_intersect_cylinder(ray, impact, (t_cylinder *)obj_ptr->content);
 		obj_ptr = obj_ptr->next;
 	}
 	if (impact->intersect == 1)
@@ -60,6 +60,7 @@ void	ft_make_image(t_img *img, t_scene *scene)
 			ray = ft_generate_ray(ray, width, height, scene);
 			if(ft_check_intersect(ray, impact, camera, scene))
 			{
+				// color = ft_shade_object(ray, impact, scene);
 				color = ft_create_trgb(1, impact->rgb.r, impact->rgb.g, impact->rgb.b);
 				my_mlx_pixel_put(img, width, height, color);
 			}

@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/08 15:10:10 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/09 16:52:30 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ unsigned    ft_create_trgb(unsigned t, unsigned r, unsigned g, unsigned b);
 t_colors	ft_color_add(t_colors color1, t_colors color2);
 t_colors	ft_color_amb(t_colors color1, float ratio);
 t_colors	ft_color_mult(t_colors color1, t_colors color2);
+t_colors	ft_reset_color(t_colors color);
 
 /* Vector functions */
 double		ft_dot_product(t_vector v1, t_vector v2);
@@ -87,5 +88,6 @@ void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere);
 void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_plane *plane);
 void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_triangle *triangle);
 void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square);
+void		ft_intersect_cylinder(t_ray *ray, t_impact *impact, t_cylinder *cylinder);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 15:57:36 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/10 20:11:43 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static t_colors	ft_get_color(t_impact *impact, t_scene *scene, t_light *light, t
 		dot = 0;
 	light_color = ft_color_amb(light->colors, light->ratio * dot);
 	tmp = ft_color_add(tmp, ft_color_mult(impact->rgb, light_color));
-	colors = ft_color_add(colors, tmp);
-	return (colors);
+	return (tmp);
 }	
 
 int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)

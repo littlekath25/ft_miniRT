@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/08 11:07:13 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/09 16:52:44 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ I_SRC	=	ft_ray.c\
 			ft_sphere.c\
 			ft_plane.c\
 			ft_triangle.c\
-			ft_square.c
+			ft_square.c\
+			ft_cylinder.c
 I_PATH	=	src/intersect/
 I_OBJ	=	$(I_SRC:%.c=$(I_PATH)%.o)
 

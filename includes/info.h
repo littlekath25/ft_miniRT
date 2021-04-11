@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/07 19:19:30 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/11 17:52:43 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ typedef enum e_obj
 	CY,
 	TR
 }	t_obj;
+
+typedef struct s_quad
+{
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+}	t_quad;
+
 
 typedef struct s_colors
 {

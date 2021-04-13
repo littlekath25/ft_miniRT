@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/17 12:52:30 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/13 20:18:59 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ t_scene	*ft_get_scene(int argc, char **argv, t_scene *scene)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error_and_exit(0, "Could not open file");
-	scene = (t_scene *)ft_calloc(sizeof(t_scene), 1);
-	if (!scene)
-		ft_error_and_exit(3, "Scene - ");
+	// scene = (t_scene *)ft_calloc(sizeof(t_scene), 1);
+	// if (!scene)
+	// 	ft_error_and_exit(3, "Scene - ");
 	ft_read_and_parse(fd, scene);
 	return (scene);
 }

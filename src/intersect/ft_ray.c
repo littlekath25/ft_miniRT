@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 14:15:19 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/03 17:33:19 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/13 16:48:24 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static t_vector	ft_get_direction(int w, int h, t_vector dir, t_camera *camera, t_scene *scene)
 {
-	double	ratio;
 	double	fov;
 
 	fov = (scene->width / 2) / (camera->fov * (M_PI / 180));

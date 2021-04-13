@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/10 20:07:10 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/13 19:44:37 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static double		ft_solve(t_ray *ray, t_impact *impact, t_sphere *sphere)
+static double		ft_solve(t_ray *ray, t_sphere *sphere)
 {
 	t_quad		quad;
 	double		second;
@@ -42,14 +42,14 @@ void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
 {
 	double		t_near;
 
-	t_near = ft_solve(ray, impact, sphere);
+	t_near = ft_solve(ray, sphere);
 	if (t_near < impact->near && t_near > RAY_MIN)
 	{
 		impact->intersect = 1;
 		impact->near = t_near;
-		impact->normal = ft_subtract(impact->hitpoint, sphere->pos);
 		impact->rgb = sphere->colors;
 		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
+		impact->normal = ft_subtract(impact->hitpoint, sphere->pos);
 		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

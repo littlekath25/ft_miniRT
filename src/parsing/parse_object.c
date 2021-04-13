@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/25 13:41:17 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/07 19:27:32 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/12 17:08:25 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_parse_plane(t_scene *scene, char **splitted)
 	ft_lstadd_back(&scene->objects, new_node);
 	ft_fill_position(splitted[1], &plane->pos);
 	ft_fill_colors(splitted[3], &plane->colors);
-	ft_fill_orientation(splitted[2], &plane->normal);
+	ft_fill_orientation(splitted[2], &plane->ori);
 	return (1);
 }
 
@@ -71,7 +71,7 @@ int	ft_parse_square(t_scene *scene, char **splitted)
 	ft_lstadd_back(&scene->objects, new_node);
 	ft_fill_position(splitted[1], &square->pos);
 	ft_fill_colors(splitted[4], &square->colors);
-	ft_fill_orientation(splitted[2], &square->normal);
+	ft_fill_orientation(splitted[2], &square->ori);
 	square->side = ft_atof(splitted[3]);
 	return (1);
 }
@@ -93,7 +93,7 @@ int	ft_parse_cylinder(t_scene *scene, char **splitted)
 	ft_lstadd_back(&scene->objects, new_node);
 	ft_fill_position(splitted[1], &cylinder->pos);
 	ft_fill_colors(splitted[5], &cylinder->colors);
-	ft_fill_orientation(splitted[2], &cylinder->normal);
+	ft_fill_orientation(splitted[2], &cylinder->ori);
 	cylinder->diameter = ft_atof(splitted[3]) / 2;
 	cylinder->height = ft_atof(splitted[4]);
 	return (1);

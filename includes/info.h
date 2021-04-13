@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/11 17:52:43 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/13 20:20:37 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_quad
 	double	c;
 	double	disc;
 }	t_quad;
-
 
 typedef struct s_colors
 {
@@ -86,7 +85,7 @@ typedef struct s_plane
 	t_obj			identifier;
 	t_vector		pos;
 	t_colors		colors;
-	t_vector		normal;
+	t_vector		ori;
 }	t_plane;
 
 typedef struct s_square
@@ -94,7 +93,7 @@ typedef struct s_square
 	t_obj			identifier;
 	t_vector		pos;
 	t_colors		colors;
-	t_vector		normal;
+	t_vector		ori;
 	double			side;
 }	t_square;
 
@@ -103,7 +102,7 @@ typedef struct s_cylinder
 	t_obj				identifier;
 	t_vector			pos;
 	t_colors			colors;
-	t_vector			normal;
+	t_vector			ori;
 	double				diameter;
 	double				height;
 }	t_cylinder;
@@ -133,12 +132,6 @@ typedef struct s_impact
 	t_vector	normal;
 }	t_impact;
 
-typedef struct s_mlx
-{
-	void	*ptr;
-	void	*win;
-}	t_mlx;
-
 typedef struct s_img
 {
 	void	*img;
@@ -148,8 +141,16 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_mlx
+{
+	void	*ptr;
+	void	*win;
+	t_img	*image;
+}	t_mlx;
+
 typedef struct s_scene
 {
+	int			debug;
 	int			width;
 	int			height;
 	t_mlx		mlx;

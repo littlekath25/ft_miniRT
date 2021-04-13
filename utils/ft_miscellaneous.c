@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/10 20:17:33 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/13 19:58:45 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	key_hook(int keycode, t_mlx *window)
 {
    if (keycode == 65307)
 	   exit(1);
+   return (0);
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)

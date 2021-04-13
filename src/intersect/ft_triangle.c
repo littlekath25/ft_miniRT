@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/07 19:47:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 12:25:04 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/13 19:44:01 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static double		ft_solve(t_ray *ray, t_impact *impact, t_triangle *triangle)
+static double		ft_solve(t_ray *ray, t_triangle *triangle)
 {
 	t_vector	e1; 
 	t_vector	e2;
@@ -46,15 +46,22 @@ static double		ft_solve(t_ray *ray, t_impact *impact, t_triangle *triangle)
 void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_triangle *triangle)
 {
 	double		t_near;
+	double		dot;
+	t_vector	ori;
 
-	t_near = ft_solve(ray, impact, triangle);
+	t_near = ft_solve(ray, triangle);
 	if (t_near < impact->near && t_near > RAY_MIN)
 	{
 		impact->intersect = 1;
 		impact->near = t_near;
 		impact->rgb = triangle->colors;
-		impact->normal = ft_cross_product(ft_subtract(triangle->pos2, triangle->pos1), ft_subtract(triangle->pos3, triangle->pos1));
 		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
+		ori = ft_cross_product(ft_subtract(triangle->pos2, triangle->pos1), ft_subtract(triangle->pos3, triangle->pos1));
+		dot = ft_dot_product(ori, ray->dir);
+		if (dot < 0)
+			impact->normal =  ori;
+		else
+			impact->normal = ft_scale(ori, -1);
 		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

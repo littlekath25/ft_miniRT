@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/28 13:03:28 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/13 21:38:18 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,29 @@ t_img	*ft_init_img(t_img *img, t_mlx *window, t_scene *scene)
 	return (img);
 }
 
+t_scene *get_scene(void)
+{
+	static t_scene scene;
+
+	return (&scene);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene		*scene;
 	t_mlx		*window;
-	t_img		*img;
 
+	scene = get_scene();
 	if (argv)
 	{
 		scene = ft_get_scene(argc, argv, scene);
 		window = ft_init_mlx(scene);
-		img = ft_init_img(img, window, scene);
-		ft_make_image(img, scene);
-		mlx_put_image_to_window(window->ptr, window->win, img->img, 0, 0);
+		window->image = ft_init_img(window->image, window, scene);
+		ft_make_image(window->image, scene);
+		mlx_put_image_to_window(window->ptr, window->win, window->image->img, 0, 0);
 	}
 	mlx_key_hook(window->win, key_hook, window);
+	// mlx_mouse_hook(window->win, debugray, scene);
 	mlx_loop(window->ptr);
 	exit(1);
 }

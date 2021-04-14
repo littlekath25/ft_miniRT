@@ -6,15 +6,22 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/13 19:58:45 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/14 14:26:39 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
+void	ft_reset_impact(t_impact *impact)
+{
+	impact->intersect = 0;
+	impact->near = INFINITY;
+	impact->normal = (t_vector){0};
+}
+
 int	key_hook(int keycode, t_mlx *window)
 {
-   if (keycode == 65307)
+   if (keycode == ESC)
 	   exit(1);
    return (0);
 }

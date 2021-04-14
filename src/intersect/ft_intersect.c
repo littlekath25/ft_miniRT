@@ -6,18 +6,11 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/13 20:59:50 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/14 14:27:27 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
-
-static void	ft_reset_impact(t_impact *impact)
-{
-	impact->intersect = 0;
-	impact->near = INFINITY;
-	impact->normal = (t_vector){0};
-}
 
 int		ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 {

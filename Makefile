@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/13 19:53:56 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/14 11:19:51 by kfu           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,11 +79,11 @@ OBJ_FILES = $(L_OBJ) $(P_OBJ) $(M_OBJ) $(U_OBJ) $(I_OBJ)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME) -ggdb3 -fsanitize=address
-
 # $(NAME): $(OBJ_FILES)
-# 	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -g3 -fsanitize=address
+# 	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME) -ggdb3 -fsanitize=address
+
+$(NAME): $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -g3 -fsanitize=address
 
 %.o: %.c
 		$(CC) -c $(CFLAGS) -o $@ $< -I includes/ -g3 -fsanitize=address

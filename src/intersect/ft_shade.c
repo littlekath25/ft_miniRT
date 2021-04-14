@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/14 14:26:36 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/14 18:18:46 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static t_colors	ft_get_color(t_impact *impact, t_scene *scene, t_light *light)
 int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)
 {
 	unsigned	final;
+	t_colors	final_rgb;
 	t_list		*light_ptr;
 	t_ray		*shadow_ray;
 	t_impact	*shadow_impact;
@@ -56,11 +57,11 @@ int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)
 	{
 		shadow_ray = ft_create_ray(shadow_ray, impact->hitpoint, ((t_light *)(light_ptr->content))->pos);
 		if(ft_check_intersect(shadow_ray, shadow_impact, scene) && shadow_impact->near < shadow_ray->len)
-			impact->rgb = ft_shadow_color(impact, scene);
+			final_rgb = ft_shadow_color(impact, scene);
 		else
-			impact->rgb = ft_get_color(impact, scene, (t_light *)light_ptr->content);
+			final_rgb = ft_get_color(impact, scene, (t_light *)light_ptr->content);
 		light_ptr = light_ptr->next;
 	}
-	final = ft_create_trgb(1, impact->rgb.r, impact->rgb.g, impact->rgb.b);
+	final = ft_create_trgb(1, final_rgb.r, final_rgb.g, final_rgb.b);
 	return (final);
 }

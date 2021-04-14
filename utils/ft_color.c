@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 11:28:17 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/13 20:05:01 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/14 17:15:54 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_colors	ft_color_add(t_colors color1, t_colors color2)
 	color1.r += color2.r;
 	color1.g += color2.g;
 	color1.b += color2.b;
-	
 	if (color1.r > 255)
 		color1.r = 255;
 	if (color1.g > 255)

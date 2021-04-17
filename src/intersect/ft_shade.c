@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/14 18:18:46 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/17 12:04:33 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)
 
 	light_ptr = (t_list *)scene->light;
 	shadow_impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
-	shadow_ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	ft_reset_impact(shadow_impact);
 	while (light_ptr != NULL)
 	{
@@ -61,7 +60,9 @@ int     ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene)
 		else
 			final_rgb = ft_get_color(impact, scene, (t_light *)light_ptr->content);
 		light_ptr = light_ptr->next;
+		free(shadow_ray);
 	}
+	free(shadow_impact);
 	final = ft_create_trgb(1, final_rgb.r, final_rgb.g, final_rgb.b);
 	return (final);
 }

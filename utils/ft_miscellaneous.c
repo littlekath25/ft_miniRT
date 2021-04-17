@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/14 14:26:39 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/17 11:05:51 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	key_hook(int keycode, t_mlx *window)
 {
    if (keycode == ESC)
 	   exit(1);
+	if (keycode == 65307)
+		exit(1);
    return (0);
 }
 

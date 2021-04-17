@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/17 12:03:20 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/17 22:06:33 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ int		ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 	return (0);
 }
 
-void	ft_make_image(t_img *img, t_scene *scene)
+void	ft_make_image(t_img *img)
 {
 	t_ray		*ray;
 	t_impact	*impact;
+	t_scene		*scene;
 	int			width;
 	int			height;
 	int			color;
@@ -49,6 +50,7 @@ void	ft_make_image(t_img *img, t_scene *scene)
 	height = 0;
 	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
+	scene = get_scene();
 	while (height < scene->height)
 	{
 		width = 0;
@@ -65,6 +67,7 @@ void	ft_make_image(t_img *img, t_scene *scene)
 		}
 		height++;
 	}
+	scene->camera = scene->camera->next;
 	free(impact);
 	free(ray);
 }

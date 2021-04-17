@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/17 11:05:51 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/17 22:11:37 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	ft_reset_impact(t_impact *impact)
 
 int	key_hook(int keycode, t_mlx *window)
 {
-   if (keycode == ESC)
+	if (keycode == ESC)
 	   exit(1);
 	if (keycode == 65307)
 		exit(1);
+	if (keycode == 65289)
+		printf("HELLO\n");
    return (0);
 }
 

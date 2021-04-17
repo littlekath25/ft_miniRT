@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/14 14:27:11 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/17 22:20:09 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 int			ft_error_and_exit(int error, char *prefix);
 int			key_hook(int keycode, t_mlx *window);
 t_mlx		*ft_init_mlx(t_scene *scene);
-t_img		*ft_init_img(t_img *image, t_mlx *window, t_scene *scene);
+t_img		*ft_init_img(t_img *image, t_mlx *window);
 void		my_mlx_pixel_put(t_img *image, int x, int y, int color);
 t_vector	ft_new_vector(double x, double y, double z);
 t_vector	ft_add_vector(t_vector v1, t_vector v2);
@@ -81,7 +81,7 @@ int			ft_fill_colors(char *colors, t_colors *color_ptr);
 int			ft_fill_orientation(char *orientation, t_vector *ori_ptr);
 
 /* Intersection */
-void		ft_make_image(t_img *img, t_scene *scene);
+void	    ft_make_image(t_img *img);
 t_ray		*ft_generate_ray(t_ray *ray, int w, int h, t_scene *scene);
 t_ray	    *ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
 int		    ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene);

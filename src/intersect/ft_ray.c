@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 14:15:19 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/14 16:20:01 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/18 11:51:59 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_ray	*ft_generate_ray(t_ray *ray, int w, int h, t_scene *scene)
 {
 	t_camera *camera;
 
-	camera = (t_camera *)scene->camera->content;
+	camera = (t_camera *)scene->current_cam->content;
 	ray->dir = ft_get_direction(w, h, ray->dir, camera, scene);
 	ray->pos = camera->pos;
 	ray->len = INFINITY;

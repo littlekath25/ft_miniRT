@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/17 22:06:33 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/18 11:17:12 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_make_image(t_img *img)
 	height = 0;
 	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
-	scene = get_scene();
+	scene = ft_static_scene();
 	while (height < scene->height)
 	{
 		width = 0;
@@ -67,7 +67,6 @@ void	ft_make_image(t_img *img)
 		}
 		height++;
 	}
-	scene->camera = scene->camera->next;
 	free(impact);
 	free(ray);
 }

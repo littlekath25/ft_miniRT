@@ -6,24 +6,26 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/17 22:20:18 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/18 10:39:40 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-t_scene *get_scene(void)
+t_scene *ft_static_scene(void)
 {
 	static t_scene scene;
 	return (&scene);
 }
 
-t_mlx	*ft_init_mlx(t_scene *scene)
+t_mlx	*ft_init_mlx(void)
 {
 	t_mlx	*window;
 	int		width;
 	int		height;
+	t_scene	*scene;
 
+	scene = ft_static_scene();
 	window = (t_mlx *)ft_calloc(sizeof(t_mlx), 1);
 	if (!window)
 		ft_error_and_exit(3, "Window - ");
@@ -41,7 +43,7 @@ t_img	*ft_init_img(t_img *img, t_mlx *window)
 {
 	t_scene *scene;
 
-	scene = get_scene();
+	scene = ft_static_scene();
 	img = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if (!img)
 		ft_error_and_exit(3, "Image - ");
@@ -55,16 +57,16 @@ int	main(int argc, char **argv)
 	t_scene		*scene;
 	t_mlx		*window;
 
-	scene = get_scene();
+	scene = ft_static_scene();
 	if (argv)
 	{
 		scene = ft_get_scene(argc, argv, scene);
-		window = ft_init_mlx(scene);
+		window = ft_init_mlx();
 		window->image = ft_init_img(window->image, window);
 		ft_make_image(window->image);
 		mlx_put_image_to_window(window->ptr, window->win, window->image->img, 0, 0);
 	}
-	mlx_key_hook(window->win, key_hook, scene);
+	mlx_key_hook(window->win, key_hook, window);
 	// mlx_mouse_hook(window->win, debugray, scene);
 	mlx_loop(window->ptr);
 	exit(1);

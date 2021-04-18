@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/13 20:18:59 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/18 11:49:13 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	ft_read_and_parse(int fd, t_scene *scene)
 		if (read == -1 || parse == -1)
 			ft_error_and_exit(0, "Something wrong with parsing");
 	}
+	scene->current_cam = scene->camera;
 	return (1);
 }
 

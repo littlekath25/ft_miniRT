@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/17 22:20:09 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/18 10:38:50 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 /* Miscellaneous functions */
 int			ft_error_and_exit(int error, char *prefix);
 int			key_hook(int keycode, t_mlx *window);
-t_mlx		*ft_init_mlx(t_scene *scene);
+t_mlx		*ft_init_mlx(void);
 t_img		*ft_init_img(t_img *image, t_mlx *window);
 void		my_mlx_pixel_put(t_img *image, int x, int y, int color);
 t_vector	ft_new_vector(double x, double y, double z);
@@ -94,7 +94,7 @@ void		ft_intersect_cylinder(t_ray *ray, t_impact *impact, t_cylinder *cylinder);
 
 /* Debug */
 int         debugray(int keycode, int x, int y, t_scene *scene);
-t_scene     *get_scene(void);
+t_scene     *ft_static_scene(void);
 void	    ft_print_vect(t_vector vector, char *pre);
 void	    ft_print_color(t_colors vector);
 

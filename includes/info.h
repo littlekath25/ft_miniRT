@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/13 20:20:37 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/18 11:46:45 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_scene
 	int			height;
 	t_mlx		mlx;
 	t_ambient	ambient;
+	t_list		*current_cam;
 	t_list		*camera;
 	t_list		*light;
 	t_list		*objects;

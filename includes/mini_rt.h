@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/18 10:38:50 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/20 16:55:48 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_vector	ft_add_vector(t_vector v1, t_vector v2);
 t_vector	ft_copy_vector(t_vector copy);
 t_vector	ft_hitpoint(t_vector v1, t_vector v2, double t);
 void        ft_reset_impact(t_impact *impact);
+t_scene     *ft_static_scene(void);
 
 /* Color functions */
 unsigned    ft_create_trgb(unsigned t, unsigned r, unsigned g, unsigned b);
@@ -82,8 +83,6 @@ int			ft_fill_orientation(char *orientation, t_vector *ori_ptr);
 
 /* Intersection */
 void	    ft_make_image(t_img *img);
-t_ray		*ft_generate_ray(t_ray *ray, int w, int h, t_scene *scene);
-t_ray	    *ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
 int		    ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene);
 int			ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene);
 void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere);
@@ -94,8 +93,13 @@ void		ft_intersect_cylinder(t_ray *ray, t_impact *impact, t_cylinder *cylinder);
 
 /* Debug */
 int         debugray(int keycode, int x, int y, t_scene *scene);
-t_scene     *ft_static_scene(void);
 void	    ft_print_vect(t_vector vector, char *pre);
 void	    ft_print_color(t_colors vector);
+
+/* Ray */
+t_ray	    *ft_generate_ray(t_ray *ray, double w, double h, t_scene *scene);
+t_ray	    *ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
+t_matrix	ft_camera_rotation(t_camera *camera);
+t_vector	ft_transform(t_vector pixel, t_matrix matrix);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:21:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/14 17:28:16 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/20 16:28:59 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_parse_camera(t_scene *scene, char **splitted)
 	ft_lstadd_back(&scene->camera, new_node);
 	ft_fill_position(splitted[1], &camera->pos);
 	ft_fill_orientation(splitted[2], &camera->ori);
-	camera->fov = ft_atoi(splitted[3]);
+	camera->fov = tan(ft_atoi(splitted[3]) * (M_PI / 180) / 2);
 	return (1);
 }
 

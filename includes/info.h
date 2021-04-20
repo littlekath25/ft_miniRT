@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/18 11:46:45 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/20 16:28:46 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef struct s_camera
 {
 	t_vector		pos;
 	t_vector		ori;
-	int				fov;
+	double			fov;
+	double			length;
 }	t_camera;
 
 typedef struct s_light
@@ -160,5 +161,21 @@ typedef struct s_scene
 	t_list		*light;
 	t_list		*objects;
 }	t_scene;
+
+typedef union u_matrix
+{
+	double		map[4][4];
+	struct
+	{
+		t_vector	right;
+		double		x;
+		t_vector	up;
+		double		y;
+		t_vector	forward;
+		double		z;
+		t_vector	origin;
+		double		w;
+	};
+}	t_matrix;
 
 #endif

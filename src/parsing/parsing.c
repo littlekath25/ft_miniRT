@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/18 11:49:13 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/18 14:18:54 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,21 @@ t_scene	*ft_get_scene(int argc, char **argv, t_scene *scene)
 	int	fd;
 
 	fd = 0;
-	if (argc < 2 || argc > 2)
-		ft_error_and_exit(0, "Invalid number of arguments");
+	if (argc < 2 || argc == 3)
+	{
+		if (argc == 3 && ft_strcmp(argv[2], "--save"))
+			ft_error_and_exit(0, "The second argument have to be --save");
+		// if (argc == 3 && !ft_strcmp(argv[2], "--save"))
+		// {
+		// 	ft_bmp();
+		// 	printf("File saved as minirt.bmp\n");
+		// }
+		else
+			ft_error_and_exit(0, "Invalid number of arguments");
+		exit(1);
+	}
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
 		ft_error_and_exit(0, "The file must end with .rt");
-	if (argc == 3 && ft_strcmp(argv[2], "--save"))
-		ft_error_and_exit(0, "The second argument have to be --save");
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error_and_exit(0, "Could not open file");

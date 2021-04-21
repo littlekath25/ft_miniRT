@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/20 16:55:48 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/21 13:19:01 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,8 @@ t_ray	    *ft_generate_ray(t_ray *ray, double w, double h, t_scene *scene);
 t_ray	    *ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
 t_matrix	ft_camera_rotation(t_camera *camera);
 t_vector	ft_transform(t_vector pixel, t_matrix matrix);
+
+/* BMP */
+void        ft_create_bmp(int width, int height);
 
 #endif

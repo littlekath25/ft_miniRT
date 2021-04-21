@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/20 16:56:42 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/21 12:52:47 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ t_scene	*ft_get_scene(int argc, char **argv, t_scene *scene)
 	{
 		if (argc == 3 && ft_strcmp(argv[2], "--save"))
 			ft_error_and_exit(0, "The second argument have to be --save");
-		// if (argc == 3 && !ft_strcmp(argv[2], "--save"))
-		// {
-		// 	ft_bmp();
-		// 	printf("File saved as minirt.bmp\n");
-		// }
+		if (argc == 3 && !ft_strcmp(argv[2], "--save"))
+		{
+			ft_create_bmp(scene->width, scene->height);
+			printf("File saved as minirt.bmp\n");
+		}
 		else
 			ft_error_and_exit(0, "Invalid number of arguments");
 		exit(1);

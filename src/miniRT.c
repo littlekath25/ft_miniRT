@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/20 18:42:17 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/21 12:33:38 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ t_mlx	*ft_init_mlx(void)
 	if (!window)
 		ft_error_and_exit(3, "Window - ");
 	window->ptr = mlx_init();
-	mlx_get_screen_size(window->ptr, &width, &height);
-	if (scene->width > width)
-		scene->width = width;
-	if (scene->height > height)
-		scene->height = height;
+	// mlx_get_screen_size(window->ptr, &width, &height);
+	// if (scene->width > width)
+	// 	scene->width = width;
+	// if (scene->height > height)
+	// 	scene->height = height;
 	window->win = mlx_new_window(window->ptr, scene->width, scene->height, "MiniRT");
 	return (window);
 }

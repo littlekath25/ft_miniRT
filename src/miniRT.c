@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/20 16:48:46 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/20 18:42:17 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 	}
 	mlx_key_hook(window->win, key_hook, window);
 	// mlx_mouse_hook(window->win, debugray, scene);
+	printf("Done with rendering\n");
 	mlx_loop(window->ptr);
 	exit(1);
 }

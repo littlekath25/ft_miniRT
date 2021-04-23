@@ -6,11 +6,38 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/23 21:41:27 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/23 22:14:17 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
+
+static void	ft_fill_bmp(t_scene *scene, int size, int fd)
+{
+	int	i;
+	int	j;
+	int	p;
+	int	k;
+	char	*data;
+
+	k = BMP_INFO + BMP_HEADER;
+	i = scene->height;
+	data = ft_calloc(size + BMP_INFO + BMP_HEADER, sizeof(unsigned char));
+	while (i--)
+	{
+		j = -1;
+		while (++j < scene->width)
+		{
+			p = ((j * (32 / 8)) + (i * 800)) / 4;
+			data[k] = 128;
+			data[k + 1] = 128;
+			data[k + 2] = 128;
+			k += 3;
+		}
+	}
+	write(fd, data, size);
+	free(data);
+}
 
 static void	ft_info_bmp(t_scene *scene, int size, int fd)
 {
@@ -62,6 +89,6 @@ void	ft_create_bmp(t_scene *scene)
 	fd = open("minirt.bmp", O_RDWR | O_CREAT, 0755);
 	ft_header_bmp(size, fd);
 	ft_info_bmp(scene, size, fd);
-	// ft_fill_bmp();
+	ft_fill_bmp(scene, size, fd);
 	close(fd);
 }

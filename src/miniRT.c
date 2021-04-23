@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/23 21:52:14 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/23 22:09:33 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_img	*ft_init_img(t_img *img, t_mlx *window)
 		ft_error_and_exit(3, "Image - ");
 	img->img = mlx_new_image(window->ptr, scene->width, scene->height);
 	img->address = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
+	printf("LINE: %i\n", img->line_len);
 	return (img);
 }
 

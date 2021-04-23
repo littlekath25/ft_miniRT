@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/21 12:33:38 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/23 21:52:14 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,21 @@ t_scene *ft_static_scene(void)
 {
 	static t_scene scene;
 	return (&scene);
+}
+
+int		ft_check_argv(int argc, char **argv)
+{
+	int		fd;
+
+	fd = 0;
+	if (argc < 2 || argc > 3)
+	{
+		ft_error_and_exit(0, "Invalid number of arguments");
+		exit(1);
+	}
+	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
+		ft_error_and_exit(0, "The file must end with .rt");
+	return (1); 
 }
 
 t_mlx	*ft_init_mlx(void)
@@ -30,11 +45,11 @@ t_mlx	*ft_init_mlx(void)
 	if (!window)
 		ft_error_and_exit(3, "Window - ");
 	window->ptr = mlx_init();
-	// mlx_get_screen_size(window->ptr, &width, &height);
-	// if (scene->width > width)
-	// 	scene->width = width;
-	// if (scene->height > height)
-	// 	scene->height = height;
+	mlx_get_screen_size(window->ptr, &width, &height);
+	if (scene->width > width)
+		scene->width = width;
+	if (scene->height > height)
+		scene->height = height;
 	window->win = mlx_new_window(window->ptr, scene->width, scene->height, "MiniRT");
 	return (window);
 }
@@ -58,7 +73,7 @@ int	main(int argc, char **argv)
 	t_mlx		*window;
 
 	scene = ft_static_scene();
-	if (argv)
+	if (ft_check_argv(argc, argv))
 	{
 		scene = ft_get_scene(argc, argv, scene);
 		window = ft_init_mlx();
@@ -68,7 +83,6 @@ int	main(int argc, char **argv)
 	}
 	mlx_key_hook(window->win, key_hook, window);
 	// mlx_mouse_hook(window->win, debugray, scene);
-	printf("Done with rendering\n");
 	mlx_loop(window->ptr);
 	exit(1);
 }

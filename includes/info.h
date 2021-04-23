@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/23 20:22:04 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/23 21:34:04 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define INFO_H
 
 # define RAY_MIN 0.00001
-# define BMP_HEADER 54
+# define BMP_HEADER 14
+# define BMP_INFO 40
 
 typedef enum e_obj
 {

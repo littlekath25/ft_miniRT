@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/21 12:52:47 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/23 21:54:29 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,36 +66,27 @@ int	ft_read_and_parse(int fd, t_scene *scene)
 		if (read == -1 || parse == -1)
 			ft_error_and_exit(0, "Something wrong with parsing");
 	}
-	scene->current_cam = scene->camera;
 	return (1);
 }
 
 t_scene	*ft_get_scene(int argc, char **argv, t_scene *scene)
 {
-	int	fd;
-
-	fd = 0;
-	if (argc < 2 || argc == 3)
-	{
-		if (argc == 3 && ft_strcmp(argv[2], "--save"))
-			ft_error_and_exit(0, "The second argument have to be --save");
-		if (argc == 3 && !ft_strcmp(argv[2], "--save"))
-		{
-			ft_create_bmp(scene->width, scene->height);
-			printf("File saved as minirt.bmp\n");
-		}
-		else
-			ft_error_and_exit(0, "Invalid number of arguments");
-		exit(1);
-	}
-	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
-		ft_error_and_exit(0, "The file must end with .rt");
+	int fd;
+	
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error_and_exit(0, "Could not open file");
-	// scene = (t_scene *)ft_calloc(sizeof(t_scene), 1);
-	// if (!scene)
-	// 	ft_error_and_exit(3, "Scene - ");
 	ft_read_and_parse(fd, scene);
+	if (argc == 3)
+	{
+		if (!ft_strcmp(argv[2], "--save"))
+		{
+			ft_create_bmp(scene);
+			printf("File saved as minirt.bmp\n");
+			exit (1);
+		}
+		else
+			ft_error_and_exit(0, "The second argument have to be --save");
+	}
 	return (scene);
 }

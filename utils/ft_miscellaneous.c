@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/21 15:45:58 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/23 20:22:00 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	key_hook(int keycode, t_mlx *window)
 	t_scene	*scene;
 
 	scene = ft_static_scene();
-	if (keycode == ESC)
+	if (keycode == 65307)
 	   exit(1);
-	if (keycode == TAB)
+	if (keycode == 65289)
 	{
 		if (scene->current_cam->next != NULL)
 			scene->current_cam = scene->current_cam->next;

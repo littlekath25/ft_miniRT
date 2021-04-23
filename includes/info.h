@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/21 15:45:49 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/23 20:22:04 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 # define INFO_H
 
 # define RAY_MIN 0.00001
-
-# ifdef LINUX
-#  define ESC		65307
-#  define TAB		65289
-# else
-#  define ESC		53
-#  define TAB		48
-# endif
+# define BMP_HEADER 54
 
 typedef enum e_obj
 {
@@ -179,22 +172,5 @@ typedef union u_matrix
 		double		w;
 	};
 }	t_matrix;
-
-typedef struct	s_bmp
-{
-	char		sig[2];
-	unsigned	size;
-	unsigned	reserved;
-	unsigned	offset;
-}	t_bmp;
-
-typedef struct	s_bheader
-{
-	unsigned	size;
-	unsigned	color_planes;
-	unsigned	color_depth;
-	unsigned	hres;
-	unsigned	wres;
-}	t_bheader;
 
 #endif

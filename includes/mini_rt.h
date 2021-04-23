@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/21 13:19:01 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/23 20:20:34 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 # include <errno.h>
-// # include <X11/X.h>
 # include <math.h>
 # include <unistd.h>
 # include <sys/stat.h>

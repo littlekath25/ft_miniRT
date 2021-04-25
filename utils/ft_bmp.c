@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/25 20:42:57 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 20:50:33 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static void	ft_header_bmp(t_scene *scene, int fd, t_mlx *window)
 {
-	char	*header;
-	int		size;
+	char				*header;
+	unsigned int		size;
 
 	size = scene->width * scene->height * 4;
+	printf("SIZE: %i\n", size);
 	header = (char *)ft_calloc(sizeof(unsigned char), BMP_HEADER);
 	header[0] = (unsigned char)('B');
 	header[1] = (unsigned char)('M');

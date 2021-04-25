@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/25 18:53:52 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 20:39:20 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 		img->data[i] = color & 255; // blue
 		img->data[i + 1] = (color >> 8) & 255; // green
 		img->data[i + 2] = (color >> 16) & 255; // red
-		img->data[i + 3] =  0 >> 24; // padding
+		img->data[i + 3] =  0; // padding
 		return;
 	}
 	dst = img->address + (y * img->line_len + x * (img->bpp / 8));

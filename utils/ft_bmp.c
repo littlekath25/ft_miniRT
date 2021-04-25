@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/25 18:25:23 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 20:42:57 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_header_bmp(t_scene *scene, int fd, t_mlx *window)
 	char	*header;
 	int		size;
 
-	size = scene->width * scene->height * 3;
+	size = scene->width * scene->height * 4;
 	header = (char *)ft_calloc(sizeof(unsigned char), BMP_HEADER);
 	header[0] = (unsigned char)('B');
 	header[1] = (unsigned char)('M');
@@ -46,7 +46,7 @@ void	ft_create_bmp(t_scene *scene, t_mlx *window)
 	char	*header;
 	int		size;
 
-	size = scene->width * scene->height * 3;
+	size = scene->width * scene->height * 4;
 	fd = open("minirt.bmp", O_RDWR | O_CREAT, 0755);
 	ft_header_bmp(scene, fd, window);
 	write(fd, window->image->data, size);

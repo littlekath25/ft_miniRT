@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/23 22:01:26 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 13:38:05 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,5 @@ t_scene	*ft_get_scene(int argc, char **argv, t_scene *scene)
 	if (fd == -1)
 		ft_error_and_exit(0, "Could not open file");
 	ft_read_and_parse(fd, scene);
-	if (argc == 3)
-	{
-		if (!ft_strcmp(argv[2], "--save"))
-		{
-			ft_create_bmp(scene);
-			printf("File saved as minirt.bmp\n");
-			exit (1);
-		}
-		else
-			ft_error_and_exit(0, "The second argument have to be --save");
-	}
 	return (scene);
 }

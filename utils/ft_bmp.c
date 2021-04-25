@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/23 22:14:17 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 14:23:13 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,36 @@
 
 static void	ft_fill_bmp(t_scene *scene, int size, int fd)
 {
-	int	i;
-	int	j;
-	int	p;
-	int	k;
+	int		i;
+	int		j;
+	int		p;
+	int		k;
 	char	*data;
 
-	k = BMP_INFO + BMP_HEADER;
+	char bitmap[] = {
+        255, // Blue
+        0, // Green
+        255, // Red
+        0  // Padding
+    };
+
 	i = scene->height;
-	data = ft_calloc(size + BMP_INFO + BMP_HEADER, sizeof(unsigned char));
-	while (i--)
+	data = (char *)ft_calloc(sizeof(unsigned char), size);
+	while (i)
 	{
-		j = -1;
-		while (++j < scene->width)
+		j = 0;
+		while (j < scene->width)
 		{
-			p = ((j * (32 / 8)) + (i * 800)) / 4;
-			data[k] = 128;
-			data[k + 1] = 128;
-			data[k + 2] = 128;
-			k += 3;
+			write(fd, &bitmap, sizeof(bitmap));
+			j++;
 		}
+		i--;
 	}
 	write(fd, data, size);
 	free(data);
 }
 
-static void	ft_info_bmp(t_scene *scene, int size, int fd)
+static void	ft_info_bmp(t_scene *scene, int size, int fd, t_mlx *window)
 {
 	char *info;
 
@@ -54,7 +58,7 @@ static void	ft_info_bmp(t_scene *scene, int size, int fd)
 	info[10] = (unsigned char)(scene->height >> 16);
 	info[11] = (unsigned char)(scene->height >> 24);
 	info[12] = (unsigned char)(1);
-	info[14] = (unsigned char)(32);
+	info[14] = (unsigned char)(window->image->bpp);
 	info[16] = (unsigned char)(0);
 	info[20] = (unsigned char)(size);
 	info[24] = (unsigned char)(3780);
@@ -79,7 +83,7 @@ static void	ft_header_bmp(int size, int fd)
 	free(header);
 }
 
-void	ft_create_bmp(t_scene *scene)
+void	ft_create_bmp(t_scene *scene, t_mlx *window)
 {
 	int		fd;
 	char	*header;
@@ -88,7 +92,7 @@ void	ft_create_bmp(t_scene *scene)
 	size = scene->width * scene->height * 3;
 	fd = open("minirt.bmp", O_RDWR | O_CREAT, 0755);
 	ft_header_bmp(size, fd);
-	ft_info_bmp(scene, size, fd);
+	ft_info_bmp(scene, size, fd, window);
 	ft_fill_bmp(scene, size, fd);
 	close(fd);
 }

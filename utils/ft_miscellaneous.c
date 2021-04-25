@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/23 20:22:00 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 18:49:39 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,20 @@ int	key_hook(int keycode, t_mlx *window)
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
-	char	*dst;
-
+	char		*dst;
+	t_scene		*scene;
+	int			i;
+	
+	scene = ft_static_scene();
+	i = (scene->height - y - 1) * img->line_len + x * img->bpp / 8;
+	if (scene->bmp == 1)
+	{
+		img->data[i] = color & 255; // blue
+		img->data[i + 1] = (color >> 8) & 255; // green
+		img->data[i + 2] = (color >> 16) & 255; // red
+		img->data[i + 3] =  0; // padding
+		return;
+	}
 	dst = img->address + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }

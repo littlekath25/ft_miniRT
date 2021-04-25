@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/23 22:01:30 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 16:55:19 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define INFO_H
 
 # define RAY_MIN 0.00001
-# define BMP_HEADER 14
-# define BMP_INFO 40
+# define BMP_HEADER 54
 
 typedef enum e_obj
 {
@@ -136,6 +135,7 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
+	char	*data;
 }	t_img;
 
 typedef struct s_mlx
@@ -148,6 +148,7 @@ typedef struct s_mlx
 typedef struct s_scene
 {
 	int			debug;
+	int			bmp;
 	int			width;
 	int			height;
 	t_mlx		mlx;

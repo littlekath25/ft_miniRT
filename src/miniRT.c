@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/25 13:38:46 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 18:19:10 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ t_scene *ft_static_scene(void)
 
 int		ft_check_argv(int argc, char **argv)
 {
-	int		fd;
+	t_scene *scene;
 
-	fd = 0;
+	scene = ft_static_scene();
+	scene->bmp = 0;
 	if (argc < 2 || argc > 3)
 	{
 		ft_error_and_exit(0, "Invalid number of arguments");
@@ -30,6 +31,13 @@ int		ft_check_argv(int argc, char **argv)
 	}
 	if (argc == 2 && ft_strncmp_rev(argv[1], ".rt", 3))
 		ft_error_and_exit(0, "The file must end with .rt");
+	if (argc == 3)
+	{
+		if (!ft_strcmp(argv[2], "--save"))
+			scene->bmp = 1;
+		else
+			ft_error_and_exit(0, "The second argument have to be --save");
+	}
 	return (1); 
 }
 
@@ -64,6 +72,8 @@ t_img	*ft_init_img(t_img *img, t_mlx *window)
 		ft_error_and_exit(3, "Image - ");
 	img->img = mlx_new_image(window->ptr, scene->width, scene->height);
 	img->address = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
+	if (scene->bmp == 1)
+		img->data = (char *)ft_calloc(sizeof(unsigned char), scene->width * scene->height * 4 + 1);
 	return (img);
 }
 
@@ -79,16 +89,11 @@ int	main(int argc, char **argv)
 		window = ft_init_mlx();
 		window->image = ft_init_img(window->image, window);
 		ft_make_image(window->image);
-		if (argc == 3)
+		if (scene->bmp == 1)
 		{
-			if (!ft_strcmp(argv[2], "--save"))
-			{
-				ft_create_bmp(scene, window);
-				printf("File saved as minirt.bmp\n");
-				exit (1);
-			}
-			else
-				ft_error_and_exit(0, "The second argument have to be --save");
+			ft_create_bmp(scene, window);
+			printf("File saved as minirt.bmp\n");
+			exit (1);
 		}
 		mlx_put_image_to_window(window->ptr, window->win, window->image->img, 0, 0);
 	}

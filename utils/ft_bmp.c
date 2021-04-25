@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/25 21:09:19 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 21:24:17 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static void	ft_header_bmp(t_scene *scene, int fd, t_mlx *window, int size)
+static void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
 {
 	char				*header;
 
@@ -27,7 +27,7 @@ static void	ft_header_bmp(t_scene *scene, int fd, t_mlx *window, int size)
 	*((unsigned int *)(header + 18)) = (unsigned int)(scene->width);
 	*((unsigned int *)(header + 22)) = (unsigned int)(scene->height);
 	*((unsigned short *)(header + 26)) = (unsigned short)(1);
-	*((unsigned short *)(header + 28)) = (unsigned short)(window->image->bpp);
+	*((unsigned short *)(header + 28)) = (unsigned short)(img->bpp);
 	*((unsigned int *)(header + 30)) = (unsigned int)(0);
 	*((unsigned int *)(header + 34)) = (unsigned int)(size);
 	*((unsigned int *)(header + 38)) = (unsigned int)(scene->width);
@@ -38,7 +38,7 @@ static void	ft_header_bmp(t_scene *scene, int fd, t_mlx *window, int size)
 	free(header);
 }
 
-void	ft_create_bmp(t_scene *scene, t_mlx *window)
+void	ft_create_bmp(t_scene *scene, t_img *img)
 {
 	int		fd;
 	char	*header;
@@ -46,7 +46,7 @@ void	ft_create_bmp(t_scene *scene, t_mlx *window)
 
 	size = scene->width * scene->height * 4;
 	fd = open("minirt.bmp", O_RDWR | O_CREAT, 0755);
-	ft_header_bmp(scene, fd, window, size);
-	write(fd, window->image->data, size);
+	ft_header_bmp(scene, fd, img, size);
+	write(fd, img->data, size);
 	close(fd);
 }

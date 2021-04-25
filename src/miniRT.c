@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/25 20:27:03 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/25 21:24:07 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,15 @@ t_img	*ft_init_img(t_img *img, t_mlx *window)
 	img = (t_img *)ft_calloc(sizeof(t_img), 1);
 	if (!img)
 		ft_error_and_exit(3, "Image - ");
+	if (scene->bmp == 1)
+	{
+		img->data = (char *)ft_calloc(sizeof(unsigned char), (scene->width * scene->height * 4));
+		img->line_len = 4 * scene->width;
+		img->bpp = 32;
+		return (img);
+	}
 	img->img = mlx_new_image(window->ptr, scene->width, scene->height);
 	img->address = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
-	if (scene->bmp == 1)
-		img->data = (char *)ft_calloc(sizeof(unsigned char), (scene->width * scene->height * 4));
 	return (img);
 }
 
@@ -81,20 +86,23 @@ int	main(int argc, char **argv)
 {
 	t_scene		*scene;
 	t_mlx		*window;
+	t_img		*bmp;
 
 	scene = ft_static_scene();
 	if (ft_check_argv(argc, argv))
 	{
 		scene = ft_get_scene(argc, argv, scene);
-		window = ft_init_mlx();
-		window->image = ft_init_img(window->image, window);
-		ft_make_image(window->image);
 		if (scene->bmp == 1)
 		{
-			ft_create_bmp(scene, window);
+			bmp = ft_init_img(bmp, NULL);
+			ft_make_image(bmp);
+			ft_create_bmp(scene, bmp);
 			printf("File saved as minirt.bmp\n");
 			exit (1);
 		}
+		window = ft_init_mlx();
+		window->image = ft_init_img(window->image, window);
+		ft_make_image(window->image);
 		mlx_put_image_to_window(window->ptr, window->win, window->image->img, 0, 0);
 	}
 	mlx_key_hook(window->win, key_hook, window);

@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/23 22:01:22 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/26 22:19:15 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int		ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
+int	ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 {
 	t_list		*obj_ptr;
 
@@ -60,7 +60,7 @@ void	ft_make_image(t_img *img)
 			{
 				color = 0;
 				ray = ft_generate_ray(ray, width, height, scene);
-				if(ft_check_intersect(ray, impact, scene))
+				if (ft_check_intersect(ray, impact, scene))
 					color = ft_shade_object(ray, impact, scene);
 				my_mlx_pixel_put(img, width, height, color);
 				width++;

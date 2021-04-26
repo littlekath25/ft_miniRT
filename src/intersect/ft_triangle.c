@@ -6,15 +6,15 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/07 19:47:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/13 19:44:01 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/26 22:40:35 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static double		ft_solve(t_ray *ray, t_triangle *triangle)
+static double	ft_solve(t_ray *ray, t_triangle *triangle)
 {
-	t_vector	e1; 
+	t_vector	e1;
 	t_vector	e2;
 	t_vector	p;
 	t_vector	t;
@@ -35,7 +35,7 @@ static double		ft_solve(t_ray *ray, t_triangle *triangle)
 	u = ft_dot_product(t, p) * d;
 	if (u < 0 || u > 1)
 		return (INFINITY);
-	q  = ft_cross_product(t, e1);
+	q = ft_cross_product(t, e1);
 	v = ft_dot_product(ray->dir, q) * d;
 	if (v < 0 || u + v > 1)
 		return (INFINITY);
@@ -43,7 +43,8 @@ static double		ft_solve(t_ray *ray, t_triangle *triangle)
 	return (t_near);
 }
 
-void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_triangle *triangle)
+void	ft_intersect_triangle(\
+t_ray *ray, t_impact *impact, t_triangle *triangle)
 {
 	double		t_near;
 	double		dot;
@@ -55,13 +56,16 @@ void		ft_intersect_triangle(t_ray *ray, t_impact *impact, t_triangle *triangle)
 		impact->intersect = 1;
 		impact->near = t_near;
 		impact->rgb = triangle->colors;
-		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-		ori = ft_cross_product(ft_subtract(triangle->pos2, triangle->pos1), ft_subtract(triangle->pos3, triangle->pos1));
+		impact->hitpoint = \
+		ft_hitpoint(ray->pos, ray->dir, impact->near);
+		ori = ft_cross_product(ft_subtract(triangle->pos2, triangle->pos1), \
+		ft_subtract(triangle->pos3, triangle->pos1));
 		dot = ft_dot_product(ori, ray->dir);
 		if (dot < 0)
-			impact->normal =  ori;
+			impact->normal = ori;
 		else
 			impact->normal = ft_scale(ori, -1);
-		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+		impact->hitpoint = \
+		ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

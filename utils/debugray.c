@@ -6,10 +6,11 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/13 19:47:42 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/13 20:52:31 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/26 22:38:31 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "mini_rt.h"
 
 void	ft_print_color(t_colors vector)
@@ -47,3 +48,4 @@ int    debugray(int keycode, int x, int y, t_scene *scene)
 	scene->debug = 0;
 	return (0);
 }
+*/

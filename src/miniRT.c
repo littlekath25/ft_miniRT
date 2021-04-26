@@ -6,21 +6,22 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/25 21:24:07 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/26 22:29:33 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-t_scene *ft_static_scene(void)
+t_scene	*ft_static_scene(void)
 {
-	static t_scene scene;
+	static t_scene	scene;
+
 	return (&scene);
 }
 
-int		ft_check_argv(int argc, char **argv)
+int	ft_check_argv(int argc, char **argv)
 {
-	t_scene *scene;
+	t_scene	*scene;
 
 	scene = ft_static_scene();
 	scene->bmp = 0;
@@ -38,7 +39,7 @@ int		ft_check_argv(int argc, char **argv)
 		else
 			ft_error_and_exit(0, "The second argument have to be --save");
 	}
-	return (1); 
+	return (1);
 }
 
 t_mlx	*ft_init_mlx(void)
@@ -58,13 +59,14 @@ t_mlx	*ft_init_mlx(void)
 		scene->width = width;
 	if (scene->height > height)
 		scene->height = height;
-	window->win = mlx_new_window(window->ptr, scene->width, scene->height, "MiniRT");
+	window->win = \
+	mlx_new_window(window->ptr, scene->width, scene->height, "MiniRT");
 	return (window);
 }
 
 t_img	*ft_init_img(t_img *img, t_mlx *window)
 {
-	t_scene *scene;
+	t_scene	*scene;
 
 	scene = ft_static_scene();
 	img = (t_img *)ft_calloc(sizeof(t_img), 1);
@@ -72,13 +74,15 @@ t_img	*ft_init_img(t_img *img, t_mlx *window)
 		ft_error_and_exit(3, "Image - ");
 	if (scene->bmp == 1)
 	{
-		img->data = (char *)ft_calloc(sizeof(unsigned char), (scene->width * scene->height * 4));
+		img->data = (char *)ft_calloc(sizeof(unsigned char), \
+		(scene->width * scene->height * 4));
 		img->line_len = 4 * scene->width;
 		img->bpp = 32;
 		return (img);
 	}
 	img->img = mlx_new_image(window->ptr, scene->width, scene->height);
-	img->address = mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
+	img->address = \
+	mlx_get_data_addr(img->img, &img->bpp, &img->line_len, &img->endian);
 	return (img);
 }
 
@@ -103,10 +107,10 @@ int	main(int argc, char **argv)
 		window = ft_init_mlx();
 		window->image = ft_init_img(window->image, window);
 		ft_make_image(window->image);
-		mlx_put_image_to_window(window->ptr, window->win, window->image->img, 0, 0);
+		mlx_put_image_to_window(window->ptr, \
+		window->win, window->image->img, 0, 0);
 	}
 	mlx_key_hook(window->win, key_hook, window);
-	// mlx_mouse_hook(window->win, debugray, scene);
 	mlx_loop(window->ptr);
 	exit(1);
 }

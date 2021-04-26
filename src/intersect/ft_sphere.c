@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/19 11:07:18 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/14 14:14:55 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/26 22:18:31 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static double		ft_solve(t_ray *ray, t_sphere *sphere)
+static double	ft_solve(t_ray *ray, t_sphere *sphere)
 {
 	t_quad		quad;
 	double		second;
@@ -30,15 +30,15 @@ static double		ft_solve(t_ray *ray, t_sphere *sphere)
 		t_near = -quad.b / (2 * quad.a);
 	if (quad.disc > 0)
 	{
-		t_near = (-quad.b  + sqrt(quad.disc)) / (2 * quad.a);
-		second = (-quad.b  - sqrt(quad.disc)) / (2 * quad.a);
+		t_near = (-quad.b + sqrt(quad.disc)) / (2 * quad.a);
+		second = (-quad.b - sqrt(quad.disc)) / (2 * quad.a);
 		if (second < t_near && second > RAY_MIN)
 			t_near = second;
 	}
 	return (t_near);
 }
 
-void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
+void	ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
 {
 	double		t_near;
 
@@ -50,6 +50,7 @@ void		ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
 		impact->rgb = sphere->colors;
 		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
 		impact->normal = ft_subtract(impact->hitpoint, sphere->pos);
-		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+		impact->hitpoint = \
+		ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

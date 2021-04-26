@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/03 12:23:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/14 14:14:51 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/26 22:19:31 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_plane *plane)
+void	ft_intersect_plane(t_ray *ray, t_impact *impact, t_plane *plane)
 {
 	double		denom;
 	double		t_near;
@@ -35,7 +35,8 @@ void		ft_intersect_plane(t_ray *ray, t_impact *impact, t_plane *plane)
 				impact->normal = plane->ori;
 			else
 				impact->normal = ft_scale(plane->ori, -1);
-			impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+			impact->hitpoint = \
+			ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 		}
 	}
 }

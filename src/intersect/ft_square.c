@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_square->c                                        :+:    :+:            */
+/*   ft_square.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/04/08 11:04:10 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 11:51:08 by katherine     ########   odam.nl         */
+/*   Created: 2021/04/26 22:28:27 by katherine     #+#    #+#                 */
+/*   Updated: 2021/04/26 22:28:29 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static double	ft_solve(t_ray *ray, t_square *square)
 		{
 			if (fabs(hit_point.x - square->pos.x) > (square->side / 2))
 				return (INFINITY);
-			if (fabs(hit_point.y - square->pos.y) > (square->side/ 2))
+			if (fabs(hit_point.y - square->pos.y) > (square->side / 2))
 				return (INFINITY);
 			if (fabs(hit_point.z - square->pos.z) > (square->side / 2))
 				return (INFINITY);
@@ -39,9 +39,9 @@ static double	ft_solve(t_ray *ray, t_square *square)
 	return (INFINITY);
 }
 
-void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
+void	ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
 {
-	double  t_near;
+	double	t_near;
 	double	dot;
 
 	t_near = ft_solve(ray, square);
@@ -57,6 +57,7 @@ void		ft_intersect_square(t_ray *ray, t_impact *impact, t_square *square)
 			impact->normal = square->ori;
 		else
 			impact->normal = ft_scale(square->ori, -1);
-		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+		impact->hitpoint = \
+		ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

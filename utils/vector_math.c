@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 22:25:47 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/08 15:09:39 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/26 22:38:04 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 double	ft_distance(t_vector p1, t_vector p2)
 {
-	return (sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
+	return (sqrt(pow(p2.x - p1.x, 2) + \
+	pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
 }
 
-void ft_normalize(t_vector *vec)
+void	ft_normalize(t_vector *vec)
 {
-    double w;
-	
+	double	w;
+
 	w = ft_magnitude(*vec);
-    vec->x /= w;
-    vec->y /= w;
-    vec->z /= w;
+	vec->x /= w;
+	vec->y /= w;
+	vec->z /= w;
 }
 
-double		ft_magnitude(t_vector vector)
+double	ft_magnitude(t_vector vector)
 {
-	return (sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2)));
+	return (sqrt(pow(vector.x, 2) + \
+	pow(vector.y, 2) + pow(vector.z, 2)));
 }
 
 t_vector	ft_cross_product(t_vector v1, t_vector v2)

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_cylinder->c                                      :+:    :+:            */
+/*   ft_cylinder.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/04/07 19:47:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/11 18:24:15 by katherine     ########   odam.nl         */
+/*   Created: 2021/04/26 22:26:31 by katherine     #+#    #+#                 */
+/*   Updated: 2021/04/26 22:28:12 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static void		ft_get_normal(t_ray *ray, t_vector obj_pos, t_impact *new_impact, double t_near)
+static void	ft_get_normal(t_ray *ray, \
+t_vector obj_pos, t_impact *new_impact, double t_near)
 {
 	ray->dir.x *= t_near;
 	ray->dir.y *= t_near;
@@ -21,9 +22,10 @@ static void		ft_get_normal(t_ray *ray, t_vector obj_pos, t_impact *new_impact, d
 	ft_normalize(&ray->dir);
 }
 
-static double	ft_find_edges(t_cylinder *cylinder, t_ray *ray, t_impact *new_impact, double t_near, double t2)
+static double	ft_find_edges(t_cylinder *cylinder, \
+t_ray *ray, t_impact *new_impact, double t_near, double t2)
 {
-	double max;
+	double	max;
 
 	ft_get_normal(ray, cylinder->pos, new_impact, t_near);
 	max = sqrt(pow(cylinder->height / 2.0, 2) + pow(cylinder->diameter, 2));
@@ -39,7 +41,7 @@ static double	ft_find_edges(t_cylinder *cylinder, t_ray *ray, t_impact *new_impa
 
 static double	ft_solve(t_ray *ray, t_impact *impact, t_cylinder *cylinder)
 {
-	t_quad          quad;
+	t_quad			quad;
 	t_ray			new_ray;
 	t_vector		ray_object;
 	t_impact		new_impact;
@@ -52,9 +54,10 @@ static double	ft_solve(t_ray *ray, t_impact *impact, t_cylinder *cylinder)
 	new_ray.dir = ft_cross_product(ray->dir, cylinder->ori);
 	ray_object = ft_subtract(ray->pos, cylinder->pos);
 	quad.a = ft_dot_product(new_ray.dir, new_ray.dir);
-	quad.b = 2 * ft_dot_product(new_ray.dir, ft_cross_product(ray_object, cylinder->ori));
-	quad.c = ft_dot_product(ft_cross_product(ray_object, cylinder->ori),
-		ft_cross_product(ray_object, cylinder->ori)) - pow(cylinder->diameter, 2);
+	quad.b = 2 * ft_dot_product(new_ray.dir, \
+	ft_cross_product(ray_object, cylinder->ori));
+	quad.c = ft_dot_product(ft_cross_product(ray_object, cylinder->ori), \
+	ft_cross_product(ray_object, cylinder->ori)) - pow(cylinder->diameter, 2);
 	quad.disc = pow(quad.b, 2) - 4 * quad.c * quad.a;
 	if (quad.disc < 0)
 		return (INFINITY);
@@ -69,7 +72,8 @@ static double	ft_solve(t_ray *ray, t_impact *impact, t_cylinder *cylinder)
 	return (ft_find_edges(cylinder, ray, &new_impact, t_near, t_2));
 }
 
-void		ft_intersect_cylinder(t_ray *ray, t_impact *impact, t_cylinder *cylinder)
+void	ft_intersect_cylinder(t_ray *ray, \
+t_impact *impact, t_cylinder *cylinder)
 {
 	double		t_near;
 	double		a;
@@ -81,12 +85,15 @@ void		ft_intersect_cylinder(t_ray *ray, t_impact *impact, t_cylinder *cylinder)
 		impact->near = t_near;
 		impact->rgb = cylinder->colors;
 		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-		a = ft_dot_product(cylinder->ori, ft_subtract(impact->hitpoint, cylinder->pos));
-		impact->normal = ft_subtract(impact->hitpoint, ft_add(cylinder->pos, ft_scale(cylinder->ori, a)));
+		a = ft_dot_product(cylinder->ori, \
+		ft_subtract(impact->hitpoint, cylinder->pos));
+		impact->normal = ft_subtract(impact->hitpoint, \
+		ft_add(cylinder->pos, ft_scale(cylinder->ori, a)));
 		ft_normalize(&impact->normal);
 		a = ft_dot_product(ray->dir, impact->normal);
 		if (a > 0)
 			impact->normal = ft_scale(impact->normal, -1);
-		impact->hitpoint = ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+		impact->hitpoint = \
+		ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/26 22:29:33 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:21:00 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,21 @@ int	main(int argc, char **argv)
 	t_img		*bmp;
 
 	scene = ft_static_scene();
+	bmp = NULL;
 	if (ft_check_argv(argc, argv))
 	{
-		scene = ft_get_scene(argc, argv, scene);
+		scene = ft_get_scene(argv, scene);
 		if (scene->bmp == 1)
 		{
 			bmp = ft_init_img(bmp, NULL);
-			ft_make_image(bmp);
+			ft_make_image(bmp, scene);
 			ft_create_bmp(scene, bmp);
 			printf("File saved as minirt.bmp\n");
 			exit (1);
 		}
 		window = ft_init_mlx();
 		window->image = ft_init_img(window->image, window);
-		ft_make_image(window->image);
+		ft_make_image(window->image, scene);
 		mlx_put_image_to_window(window->ptr, \
 		window->win, window->image->img, 0, 0);
 	}

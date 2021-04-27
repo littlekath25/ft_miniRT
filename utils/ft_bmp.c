@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/25 21:24:17 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:03:47 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
 void	ft_create_bmp(t_scene *scene, t_img *img)
 {
 	int		fd;
-	char	*header;
 	int		size;
 
 	size = scene->width * scene->height * 4;

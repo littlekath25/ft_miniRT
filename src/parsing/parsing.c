@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/26 22:08:05 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:02:40 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_read_and_parse(int fd, t_scene *scene)
 	return (1);
 }
 
-t_scene	*ft_get_scene(int argc, char **argv, t_scene *scene)
+t_scene	*ft_get_scene(char **argv, t_scene *scene)
 {
 	int	fd;
 

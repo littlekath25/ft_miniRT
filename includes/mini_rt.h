@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/26 22:02:33 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:21:23 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int				ft_check_fov(char *fov);
 int				ft_check_ratio(char *ratio);
 
 /* Parsing all the elements */
-t_scene			*ft_get_scene(int argc, char **argv, t_scene *scene);
+t_scene			*ft_get_scene(char **argv, t_scene *scene);
 int				ft_read_and_parse(int fd, t_scene *scene);
 int				ft_parse_this_line(t_scene *scene, char **splitted);
 int				ft_parse_resolution(t_scene *scene, char **splitted);
@@ -82,10 +82,10 @@ int				ft_fill_colors(char *colors, t_colors *color_ptr);
 int				ft_fill_orientation(char *orientation, t_vector *ori_ptr);
 
 /* Intersection */
-void			ft_make_image(t_img *img);
+void			ft_make_image(t_img *img, t_scene *scene);
 int				\
 ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene);
-int				ft_shade_object(t_ray *ray, t_impact *impact, t_scene *scene);
+int				ft_shade_object(t_impact *impact, t_scene *scene);
 void			\
 ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere);
 void			\

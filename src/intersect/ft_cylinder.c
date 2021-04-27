@@ -6,14 +6,14 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/26 22:26:31 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/26 22:28:12 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:07:55 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
 static void	ft_get_normal(t_ray *ray, \
-t_vector obj_pos, t_impact *new_impact, double t_near)
+t_impact *new_impact, double t_near)
 {
 	ray->dir.x *= t_near;
 	ray->dir.y *= t_near;
@@ -27,12 +27,12 @@ t_ray *ray, t_impact *new_impact, double t_near, double t2)
 {
 	double	max;
 
-	ft_get_normal(ray, cylinder->pos, new_impact, t_near);
+	ft_get_normal(ray, new_impact, t_near);
 	max = sqrt(pow(cylinder->height / 2.0, 2) + pow(cylinder->diameter, 2));
 	if (ft_magnitude(ft_subtract(new_impact->hitpoint, cylinder->pos)) > max)
 	{
 		t_near = t2;
-		ft_get_normal(ray, cylinder->pos, new_impact, t_near);
+		ft_get_normal(ray,new_impact, t_near);
 	}
 	if (ft_magnitude(ft_subtract(new_impact->hitpoint, cylinder->pos)) > max)
 		return (INFINITY);

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 14:15:19 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/20 18:57:22 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:04:05 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_ray	*ft_generate_ray(t_ray *ray, double w, double h, t_scene *scene)
 {
 	t_camera	*camera;
 	t_matrix	matrix;
-	double		z;
 
 	camera = (t_camera *)scene->current_cam->content;
 	matrix = ft_camera_rotation(camera);

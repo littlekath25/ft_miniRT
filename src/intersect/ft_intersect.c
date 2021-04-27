@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/26 22:19:15 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:24:28 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ int	ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 	return (0);
 }
 
-void	ft_make_image(t_img *img)
+void	ft_make_image(t_img *img, t_scene *scene)
 {
 	t_ray		*ray;
 	t_impact	*impact;
-	t_scene		*scene;
 	int			width;
 	int			height;
 	int			color;
@@ -50,7 +49,6 @@ void	ft_make_image(t_img *img)
 	height = 0;
 	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
-	scene = ft_static_scene();
 	if (scene->camera)
 	{
 		while (height < scene->height)
@@ -61,7 +59,7 @@ void	ft_make_image(t_img *img)
 				color = 0;
 				ray = ft_generate_ray(ray, width, height, scene);
 				if (ft_check_intersect(ray, impact, scene))
-					color = ft_shade_object(ray, impact, scene);
+					color = ft_shade_object(impact, scene);
 				my_mlx_pixel_put(img, width, height, color);
 				width++;
 			}

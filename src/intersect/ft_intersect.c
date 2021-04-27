@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/27 16:24:28 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:39:28 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,38 @@ int	ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 	return (0);
 }
 
+void	ft_shoot_ray(t_img *img, \
+t_ray *ray, t_impact *impact, t_scene *scene)
+{
+	int	height;
+	int	width;
+	int	color;
+
+	height = 0;
+	while (height < scene->height)
+	{
+		width = 0;
+		while (width < scene->width)
+		{
+			color = 0;
+			ray = ft_generate_ray(ray, width, height, scene);
+			if (ft_check_intersect(ray, impact, scene))
+				color = ft_shade_object(impact, scene);
+			my_mlx_pixel_put(img, width, height, color);
+			width++;
+		}
+		height++;
+	}
+}
+
 void	ft_make_image(t_img *img, t_scene *scene)
 {
 	t_ray		*ray;
 	t_impact	*impact;
-	int			width;
-	int			height;
-	int			color;
 
-	width = 0;
-	height = 0;
-	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
-	if (scene->camera)
-	{
-		while (height < scene->height)
-		{
-			width = 0;
-			while (width < scene->width)
-			{
-				color = 0;
-				ray = ft_generate_ray(ray, width, height, scene);
-				if (ft_check_intersect(ray, impact, scene))
-					color = ft_shade_object(impact, scene);
-				my_mlx_pixel_put(img, width, height, color);
-				width++;
-			}
-			height++;
-		}
-	}
+	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
+	ft_shoot_ray(img, ray, impact, scene);
 	free(impact);
 	free(ray);
 }

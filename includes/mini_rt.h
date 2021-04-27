@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/27 16:21:23 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:38:27 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,16 @@ int				debugray(int keycode, int x, int y, t_scene *scene);
 void			ft_print_vect(t_vector vector, char *pre);
 void			ft_print_color(t_colors vector);
 
+/* Camera */
+t_matrix		ft_camera_rotation(t_camera *camera);
+t_vector		ft_transform(t_vector pixel, t_matrix matrix);
+
 /* Ray */
 t_ray			\
 *ft_generate_ray(t_ray *ray, double w, double h, t_scene *scene);
 t_ray			*ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
-t_matrix		ft_camera_rotation(t_camera *camera);
-t_vector		ft_transform(t_vector pixel, t_matrix matrix);
+void			ft_shoot_ray(t_img *img, \
+t_ray *ray, t_impact *impact, t_scene *scene);
 
 /* BMP */
 void			ft_create_bmp(t_scene *scene, t_img *img);

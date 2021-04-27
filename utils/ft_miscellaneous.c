@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/26 22:33:37 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 16:39:17 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_hook(int keycode, t_mlx *window)
 			scene->current_cam = scene->current_cam->next;
 		else
 			scene->current_cam = scene->camera;
-		ft_make_image(window->image);
+		ft_make_image(window->image, scene);
 		mlx_put_image_to_window(window->ptr, \
 		window->win, window->image->img, 0, 0);
 	}

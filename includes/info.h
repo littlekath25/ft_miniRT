@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/25 16:55:19 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 20:57:46 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,14 @@ typedef struct s_cylinder
 	double				height;
 }	t_cylinder;
 
+typedef struct s_solve_cylinder
+{
+	t_quad		quad;
+	double		t_near;
+	double		t_1;
+	double		t_2;
+}	t_solve_cylinder;
+
 typedef struct s_triangle
 {
 	t_obj				identifier;
@@ -111,6 +119,19 @@ typedef struct s_triangle
 	t_vector			pos3;
 	t_colors			colors;
 }	t_triangle;
+
+typedef struct s_solve_triangle
+{
+	t_vector	e1;
+	t_vector	e2;
+	t_vector	p;
+	t_vector	t;
+	t_vector	q;
+	double		d;
+	double		t_near;
+	double		u;
+	double		v;
+}	t_solve_triangle;
 
 typedef struct s_ray
 {

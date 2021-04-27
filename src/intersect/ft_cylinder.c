@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/26 22:26:31 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/27 16:07:55 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 21:02:29 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,53 +23,50 @@ t_impact *new_impact, double t_near)
 }
 
 static double	ft_find_edges(t_cylinder *cylinder, \
-t_ray *ray, t_impact *new_impact, double t_near, double t2)
+t_ray *ray, t_impact *new_impact, t_solve_cylinder *info)
 {
 	double	max;
 
-	ft_get_normal(ray, new_impact, t_near);
+	ft_get_normal(ray, new_impact, info->t_near);
 	max = sqrt(pow(cylinder->height / 2.0, 2) + pow(cylinder->diameter, 2));
 	if (ft_magnitude(ft_subtract(new_impact->hitpoint, cylinder->pos)) > max)
 	{
-		t_near = t2;
-		ft_get_normal(ray,new_impact, t_near);
+		info->t_near = info->t_2;
+		ft_get_normal(ray, new_impact, info->t_near);
 	}
 	if (ft_magnitude(ft_subtract(new_impact->hitpoint, cylinder->pos)) > max)
 		return (INFINITY);
-	return (t_near);
+	return (info->t_near);
 }
 
 static double	ft_solve(t_ray *ray, t_impact *impact, t_cylinder *cylinder)
 {
-	t_quad			quad;
-	t_ray			new_ray;
-	t_vector		ray_object;
-	t_impact		new_impact;
-	double			t_near;
-	double			t_1;
-	double			t_2;
+	t_solve_cylinder	info;
+	t_ray				new_ray;
+	t_vector			ray_object;
+	t_impact			new_impact;
 
 	new_impact = *impact;
 	new_ray.pos = ray->pos;
 	new_ray.dir = ft_cross_product(ray->dir, cylinder->ori);
 	ray_object = ft_subtract(ray->pos, cylinder->pos);
-	quad.a = ft_dot_product(new_ray.dir, new_ray.dir);
-	quad.b = 2 * ft_dot_product(new_ray.dir, \
+	info.quad.a = ft_dot_product(new_ray.dir, new_ray.dir);
+	info.quad.b = 2 * ft_dot_product(new_ray.dir, \
 	ft_cross_product(ray_object, cylinder->ori));
-	quad.c = ft_dot_product(ft_cross_product(ray_object, cylinder->ori), \
+	info.quad.c = ft_dot_product(ft_cross_product(ray_object, cylinder->ori), \
 	ft_cross_product(ray_object, cylinder->ori)) - pow(cylinder->diameter, 2);
-	quad.disc = pow(quad.b, 2) - 4 * quad.c * quad.a;
-	if (quad.disc < 0)
+	info.quad.disc = pow(info.quad.b, 2) - 4 * info.quad.c * info.quad.a;
+	if (info.quad.disc < 0)
 		return (INFINITY);
-	t_1 = (-quad.b - sqrt(quad.disc)) / (2 * quad.a);
-	t_2 = (-quad.b + sqrt(quad.disc)) / (2 * quad.a);
-	if (t_2 < 0)
+	info.t_1 = (-info.quad.b - sqrt(info.quad.disc)) / (2 * info.quad.a);
+	info.t_2 = (-info.quad.b + sqrt(info.quad.disc)) / (2 * info.quad.a);
+	if (info.t_2 < 0)
 		return (INFINITY);
-	if (t_1 > 0)
-		t_near = t_1;
+	if (info.t_1 > 0)
+		info.t_near = info.t_1;
 	else
-		t_near = t_2;
-	return (ft_find_edges(cylinder, ray, &new_impact, t_near, t_2));
+		info.t_near = info.t_2;
+	return (ft_find_edges(cylinder, ray, &new_impact, &info));
 }
 
 void	ft_intersect_cylinder(t_ray *ray, \

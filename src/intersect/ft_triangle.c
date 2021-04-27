@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/07 19:47:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/26 22:40:35 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/27 20:51:29 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,25 @@
 
 static double	ft_solve(t_ray *ray, t_triangle *triangle)
 {
-	t_vector	e1;
-	t_vector	e2;
-	t_vector	p;
-	t_vector	t;
-	t_vector	q;
-	double		d;
-	double		t_near;
-	double		u;
-	double		v;
+	static t_solve_triangle	info;
 
-	e1 = ft_subtract(triangle->pos2, triangle->pos1);
-	e2 = ft_subtract(triangle->pos3, triangle->pos1);
-	p = ft_cross_product(ray->dir, e2);
-	d = ft_dot_product(e1, p);
-	if (fabs(d) < RAY_MIN)
+	info.e1 = ft_subtract(triangle->pos2, triangle->pos1);
+	info.e2 = ft_subtract(triangle->pos3, triangle->pos1);
+	info.p = ft_cross_product(ray->dir, info.e2);
+	info.d = ft_dot_product(info.e1, info.p);
+	if (fabs(info.d) < RAY_MIN)
 		return (INFINITY);
-	d = 1 / d;
-	t = ft_subtract(ray->pos, triangle->pos1);
-	u = ft_dot_product(t, p) * d;
-	if (u < 0 || u > 1)
+	info.d = 1 / info.d;
+	info.t = ft_subtract(ray->pos, triangle->pos1);
+	info.u = ft_dot_product(info.t, info.p) * info.d;
+	if (info.u < 0 || info.u > 1)
 		return (INFINITY);
-	q = ft_cross_product(t, e1);
-	v = ft_dot_product(ray->dir, q) * d;
-	if (v < 0 || u + v > 1)
+	info.q = ft_cross_product(info.t, info.e1);
+	info.v = ft_dot_product(ray->dir, info.q) * info.d;
+	if (info.v < 0 || info.u + info.v > 1)
 		return (INFINITY);
-	t_near = ft_dot_product(e2, q) * d;
-	return (t_near);
+	info.t_near = ft_dot_product(info.e2, info.q) * info.d;
+	return (info.t_near);
 }
 
 void	ft_intersect_triangle(\

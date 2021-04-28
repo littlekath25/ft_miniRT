@@ -6,14 +6,14 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/28 15:23:15 by kfu           ########   odam.nl          #
+#    Updated: 2021/04/28 15:49:11 by kfu           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	miniRT
 CC		= 	gcc
 RM		=	rm -f
-# CFLAGS	= 	-Wall -Wextra -Werror
+CFLAGS	= 	-Wall -Wextra -Werror
 
 M_SRC	= 	miniRT.c
 M_PATH	=	src/

@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 14:15:19 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/27 16:04:05 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/28 15:46:23 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_matrix	ft_camera_rotation(t_camera *camera)
 t_ray	*ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light)
 {
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
+	if (ray == NULL)
+		ft_error_and_exit(3, "Ray struct - ");
 	ray->pos = hitpoint;
 	ray->dir = ft_subtract(light, hitpoint);
 	ray->len = ft_magnitude(ray->dir);

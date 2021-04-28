@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/29 12:08:46 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/27 16:05:52 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/28 15:45:14 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,37 @@ t_light *light, t_colors final_rgb)
 	final_rgb = \
 	ft_color_add(final_rgb, ft_color_mult(impact->rgb, light_color));
 	return (final_rgb);
-}	
+}
+
+t_colors	ft_check_lights(t_impact *impact, t_ray *shadow_ray, \
+t_impact *shadow_impact, t_list *light_ptr)
+{
+	t_colors	final_rgb;
+	t_scene		*scene;
+
+	scene = ft_static_scene();
+	final_rgb = ft_color_mult(impact->rgb, scene->ambient.colors);
+	while (light_ptr != NULL)
+	{
+		shadow_ray = \
+		ft_create_ray(shadow_ray, \
+		impact->hitpoint, ((t_light *)(light_ptr->content))->pos);
+		if (ft_check_intersect(shadow_ray, shadow_impact, scene) && \
+		shadow_impact->near < shadow_ray->len)
+		{
+			light_ptr = light_ptr->next;
+			free(shadow_ray);
+			continue ;
+		}
+		else
+			final_rgb = ft_get_color(impact, \
+			(t_light *)light_ptr->content, final_rgb);
+		light_ptr = light_ptr->next;
+		free(shadow_ray);
+	}
+	free(shadow_impact);
+	return (final_rgb);
+}
 
 int	ft_shade_object(t_impact *impact, t_scene *scene)
 {
@@ -43,23 +73,10 @@ int	ft_shade_object(t_impact *impact, t_scene *scene)
 
 	light_ptr = (t_list *)scene->light;
 	shadow_impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
+	if (shadow_impact == NULL)
+		ft_error_and_exit(3, "Shadow impact - ");
 	ft_reset_impact(shadow_impact);
-	final_rgb = ft_color_mult(impact->rgb, scene->ambient.colors);
-	while (light_ptr != NULL)
-	{
-		shadow_ray = \
-		ft_create_ray(shadow_ray, \
-		impact->hitpoint, ((t_light *)(light_ptr->content))->pos);
-		if (ft_check_intersect(shadow_ray, shadow_impact, scene) && \
-		shadow_impact->near < shadow_ray->len)
-			final_rgb = final_rgb;
-		else
-			final_rgb = ft_get_color(impact, \
-			(t_light *)light_ptr->content, final_rgb);
-		light_ptr = light_ptr->next;
-		free(shadow_ray);
-	}
-	free(shadow_impact);
+	final_rgb = ft_check_lights(impact, shadow_ray, shadow_impact, light_ptr);
 	final = ft_create_trgb(1, final_rgb.r, final_rgb.g, final_rgb.b);
 	return (final);
 }

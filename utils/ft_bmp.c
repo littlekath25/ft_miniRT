@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/27 16:03:47 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/28 15:47:08 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
 	char				*header;
 
 	header = (char *)ft_calloc(sizeof(unsigned char), BMP_HEADER);
+	if (header == NULL)
+		ft_error_and_exit(3, "BMP Header - ");
 	*((unsigned char *)(header)) = (unsigned char)('B');
 	*((unsigned char *)(header + 1)) = (unsigned char)('M');
 	*((unsigned int *)(header + 2)) = (unsigned int)(size + BMP_HEADER);

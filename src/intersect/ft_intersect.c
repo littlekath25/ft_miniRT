@@ -6,7 +6,7 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/18 12:26:03 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/27 16:39:28 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/28 15:46:04 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ void	ft_make_image(t_img *img, t_scene *scene)
 	t_impact	*impact;
 
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
+	if (ray == NULL)
+		ft_error_and_exit(3, "Ray struct - ");
 	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
+	if (impact == NULL)
+		ft_error_and_exit(3, "Impact struct - ");
 	ft_shoot_ray(img, ray, impact, scene);
 	free(impact);
 	free(ray);

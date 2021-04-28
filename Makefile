@@ -6,14 +6,14 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/27 16:01:58 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/28 15:23:15 by kfu           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	miniRT
 CC		= 	gcc
 RM		=	rm -f
-CFLAGS	= 	-Wall -Wextra -Werror
+# CFLAGS	= 	-Wall -Wextra -Werror
 
 M_SRC	= 	miniRT.c
 M_PATH	=	src/
@@ -74,7 +74,8 @@ U_SRC	=	ft_error.c\
 			vector_math_2.c\
 			ft_color.c\
 			debugray.c\
-			ft_bmp.c
+			ft_bmp.c\
+			ft_init.c
 U_PATH	=	utils/
 U_OBJ	=	$(U_SRC:%.c=$(U_PATH)%.o)
 
@@ -82,11 +83,11 @@ OBJ_FILES = $(L_OBJ) $(P_OBJ) $(M_OBJ) $(U_OBJ) $(I_OBJ)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME) -ggdb3 -fsanitize=address
-
 # $(NAME): $(OBJ_FILES)
-# 	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -g3 -fsanitize=address
+# 	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME) -ggdb3 -fsanitize=address
+
+$(NAME): $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -g3 -fsanitize=address
 
 %.o: %.c
 		$(CC) -c $(CFLAGS) -o $@ $< -I includes/ -g3 -fsanitize=address

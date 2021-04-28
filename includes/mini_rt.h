@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/27 16:38:27 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/28 15:16:25 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@
 # include "info.h"
 # include "get_next_line.h"
 
+/* Render */
+t_mlx			*ft_init_mlx(void);
+t_img			*ft_init_img(t_img *image, t_mlx *window);
+
 /* Miscellaneous functions */
 int				ft_error_and_exit(int error, char *prefix);
 int				key_hook(int keycode, t_mlx *window);
-t_mlx			*ft_init_mlx(void);
-t_img			*ft_init_img(t_img *image, t_mlx *window);
 void			my_mlx_pixel_put(t_img *image, int x, int y, int color);
-t_vector		ft_new_vector(double x, double y, double z);
-t_vector		ft_add_vector(t_vector v1, t_vector v2);
-t_vector		ft_copy_vector(t_vector copy);
-t_vector		ft_hitpoint(t_vector v1, t_vector v2, double t);
 void			ft_reset_impact(t_impact *impact);
 t_scene			*ft_static_scene(void);
 
@@ -54,7 +52,8 @@ t_vector		ft_subtract(t_vector v1, t_vector v2);
 t_vector		ft_add(t_vector v1, t_vector v2);
 t_vector		ft_scale(t_vector v1, double scalar);
 double			ft_distance(t_vector p1, t_vector p2);
-t_vector		ft_invert(t_vector vector);
+t_vector		ft_new_vector(double x, double y, double z);
+t_vector		ft_hitpoint(t_vector v1, t_vector v2, double t);
 
 /* Error checking while parsing */
 int				ft_check_colors(char *colors);

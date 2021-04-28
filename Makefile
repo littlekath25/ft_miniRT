@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/28 15:49:11 by kfu           ########   odam.nl          #
+#    Updated: 2021/04/28 15:54:16 by kfu           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,14 +68,14 @@ L_PATH	=	libft/
 L_OBJ	=	$(L_SRC:%.c=$(L_PATH)%.o)
 
 U_SRC	=	ft_error.c\
-			get_next_line.c\
 			ft_miscellaneous.c\
-			vector_math.c\
-			vector_math_2.c\
+			ft_vector_math.c\
+			ft_vector_math_2.c\
 			ft_color.c\
-			debugray.c\
 			ft_bmp.c\
-			ft_init.c
+			ft_init.c\
+			debugray.c\
+			get_next_line.c
 U_PATH	=	utils/
 U_OBJ	=	$(U_SRC:%.c=$(U_PATH)%.o)
 
@@ -84,13 +84,13 @@ OBJ_FILES = $(L_OBJ) $(P_OBJ) $(M_OBJ) $(U_OBJ) $(I_OBJ)
 all: $(NAME)
 
 # $(NAME): $(OBJ_FILES)
-# 	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME) -ggdb3 -fsanitize=address
+# 	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) -g3 -fsanitize=address
+	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
 
 %.o: %.c
-		$(CC) -c $(CFLAGS) -o $@ $< -I includes/ -g3 -fsanitize=address
+		$(CC) -c $(CFLAGS) -o $@ $< -I includes/
 
 clean:
 	$(RM) $(OBJ_FILES)

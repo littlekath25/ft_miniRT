@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/28 15:19:36 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/28 15:54:30 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_mlx	*ft_init_mlx(void)
 {
 	t_mlx	*window;
-	// int		width;
-	// int		height;
+	int		width;
+	int		height;
 	t_scene	*scene;
 
 	scene = ft_static_scene();
@@ -24,11 +24,11 @@ t_mlx	*ft_init_mlx(void)
 	if (!window)
 		ft_error_and_exit(3, "Window - ");
 	window->ptr = mlx_init();
-	// mlx_get_screen_size(window->ptr, &width, &height);
-	// if (scene->width > width)
-	// 	scene->width = width;
-	// if (scene->height > height)
-	// 	scene->height = height;
+	mlx_get_screen_size(window->ptr, &width, &height);
+	if (scene->width > width)
+		scene->width = width;
+	if (scene->height > height)
+		scene->height = height;
 	window->win = \
 	mlx_new_window(window->ptr, scene->width, scene->height, "MiniRT");
 	return (window);

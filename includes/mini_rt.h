@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/28 15:16:25 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/28 17:04:10 by kfu           ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void			ft_reset_impact(t_impact *impact);
 t_scene			*ft_static_scene(void);
 
 /* Color functions */
-unsigned int	\
-ft_create_trgb(unsigned int t, unsigned int r, unsigned int g, unsigned int b);
 t_colors		ft_color_add(t_colors color1, t_colors color2);
 t_colors		ft_color_scale(t_colors color1, float ratio);
 t_colors		ft_color_mult(t_colors color1, t_colors color2);
+unsigned int	\
+ft_create_trgb(unsigned int t, unsigned int r, unsigned int g, unsigned int b);
 
 /* Vector functions */
 double			ft_dot_product(t_vector v1, t_vector v2);
@@ -82,9 +82,9 @@ int				ft_fill_orientation(char *orientation, t_vector *ori_ptr);
 
 /* Intersection */
 void			ft_make_image(t_img *img, t_scene *scene);
+int				ft_shade_object(t_impact *impact, t_scene *scene);
 int				\
 ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene);
-int				ft_shade_object(t_impact *impact, t_scene *scene);
 void			\
 ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere);
 void			\
@@ -106,12 +106,11 @@ t_matrix		ft_camera_rotation(t_camera *camera);
 t_vector		ft_transform(t_vector pixel, t_matrix matrix);
 
 /* Ray */
+t_ray			*ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
+void			\
+ft_shoot_ray(t_img *img, t_ray *ray, t_impact *impact, t_scene *scene);
 t_ray			\
 *ft_generate_ray(t_ray *ray, double w, double h, t_scene *scene);
-t_ray			*ft_create_ray(t_ray *ray, t_vector hitpoint, t_vector light);
-void			ft_shoot_ray(t_img *img, \
-t_ray *ray, t_impact *impact, t_scene *scene);
-
 /* BMP */
 void			ft_create_bmp(t_scene *scene, t_img *img);
 

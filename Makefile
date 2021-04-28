@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/28 15:54:16 by kfu           ########   odam.nl          #
+#    Updated: 2021/04/28 17:22:19 by kfu           ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME	= 	miniRT
 CC		= 	gcc
 RM		=	rm -f
 CFLAGS	= 	-Wall -Wextra -Werror
+UNAME_S := 	$(shell uname -s)
 
 M_SRC	= 	miniRT.c
 M_PATH	=	src/
@@ -83,11 +84,13 @@ OBJ_FILES = $(L_OBJ) $(P_OBJ) $(M_OBJ) $(U_OBJ) $(I_OBJ)
 
 all: $(NAME)
 
-# $(NAME): $(OBJ_FILES)
-# 	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
-
-$(NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
+ifeq ($(UNAME_S),Linux)
+	$(NAME): $(OBJ_FILES)
+		$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
+else
+	$(NAME): $(OBJ_FILES)
+		$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
+endif
 
 %.o: %.c
 		$(CC) -c $(CFLAGS) -o $@ $< -I includes/

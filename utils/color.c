@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_color.c                                         :+:    :+:            */
+/*   color.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
@@ -12,13 +12,13 @@
 
 #include "mini_rt.h"
 
-unsigned int	ft_create_trgb(unsigned int t, \
+unsigned int	create_trgb(unsigned int t, \
 unsigned int r, unsigned int g, unsigned int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-t_colors	ft_color_add(t_colors color1, t_colors color2)
+t_colors	color_add(t_colors color1, t_colors color2)
 {
 	t_colors	new;
 
@@ -34,7 +34,7 @@ t_colors	ft_color_add(t_colors color1, t_colors color2)
 	return (new);
 }
 
-t_colors	ft_color_scale(t_colors color1, float ratio)
+t_colors	color_scale(t_colors color1, float ratio)
 {
 	t_colors	new;
 
@@ -44,7 +44,7 @@ t_colors	ft_color_scale(t_colors color1, float ratio)
 	return (new);
 }
 
-t_colors	ft_color_mult(t_colors color1, t_colors color2)
+t_colors	color_mult(t_colors color1, t_colors color2)
 {
 	t_colors	new;
 

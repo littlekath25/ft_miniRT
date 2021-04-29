@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_error.c                                         :+:    :+:            */
+/*   error.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 14:22:28 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/28 18:09:15 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/29 20:24:51 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int	ft_check_orientation(char *orientation)
+int	check_orientation(char *orientation)
 {
 	float	x;
 	float	y;
@@ -33,7 +33,7 @@ int	ft_check_orientation(char *orientation)
 	return (ret);
 }
 
-int	ft_check_fov(char *fov)
+int	check_fov(char *fov)
 {
 	float	f;
 
@@ -43,7 +43,7 @@ int	ft_check_fov(char *fov)
 	return (1);
 }
 
-int	ft_check_ratio(char *ratio)
+int	check_ratio(char *ratio)
 {
 	float	rat;
 
@@ -53,7 +53,7 @@ int	ft_check_ratio(char *ratio)
 	return (1);
 }
 
-int	ft_check_colors(char *colors)
+int	check_colors(char *colors)
 {
 	int		r;
 	int		g;
@@ -74,7 +74,7 @@ int	ft_check_colors(char *colors)
 	return (ret);
 }
 
-int	ft_error_and_exit(int error, char *prefix)
+int	error_and_exit(int error, char *prefix)
 {
 	if (error == 0)
 		printf("Error\n%s\n", prefix);

@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   vector_math.c                                      :+:    :+:            */
+/*   vector_utils_2.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/16 22:25:47 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/26 22:38:04 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 20:25:57 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-double	ft_distance(t_vector p1, t_vector p2)
+double	distance(t_vector p1, t_vector p2)
 {
 	return (sqrt(pow(p2.x - p1.x, 2) + \
 	pow(p2.y - p1.y, 2) + pow(p2.z - p1.z, 2)));
 }
 
-void	ft_normalize(t_vector *vec)
+void	normalize(t_vector *vec)
 {
 	double	w;
 
-	w = ft_magnitude(*vec);
+	w = magnitude(*vec);
 	vec->x /= w;
 	vec->y /= w;
 	vec->z /= w;
 }
 
-double	ft_magnitude(t_vector vector)
+double	magnitude(t_vector vector)
 {
 	return (sqrt(pow(vector.x, 2) + \
 	pow(vector.y, 2) + pow(vector.z, 2)));
 }
 
-t_vector	ft_cross_product(t_vector v1, t_vector v2)
+t_vector	cross_product(t_vector v1, t_vector v2)
 {
 	t_vector	new;
 
@@ -44,7 +44,7 @@ t_vector	ft_cross_product(t_vector v1, t_vector v2)
 	return (new);
 }
 
-double	ft_dot_product(t_vector v1, t_vector v2)
+double	dot_product(t_vector v1, t_vector v2)
 {
 	return ((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z));
 }

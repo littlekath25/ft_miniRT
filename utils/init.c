@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_init.c                                          :+:    :+:            */
+/*   init.c                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
@@ -12,7 +12,7 @@
 
 #include "mini_rt.h"
 
-t_mlx	*ft_init_mlx(t_scene *scene)
+t_mlx	*init_mlx(t_scene *scene)
 {
 	t_mlx	*window;
 	int		width;
@@ -20,7 +20,7 @@ t_mlx	*ft_init_mlx(t_scene *scene)
 
 	window = (t_mlx *)ft_calloc(sizeof(t_mlx), 1);
 	if (!window)
-		ft_error_and_exit(3, "Window - ");
+		error_and_exit(3, "Window - ");
 	window->ptr = mlx_init();
 	mlx_get_screen_size(window->ptr, &width, &height);
 	if (scene->width > width)
@@ -32,20 +32,20 @@ t_mlx	*ft_init_mlx(t_scene *scene)
 	return (window);
 }
 
-t_img	*ft_init_img(t_img *img, t_mlx *window)
+t_img	*init_img(t_img *img, t_mlx *window)
 {
 	t_scene	*scene;
 
-	scene = ft_static_scene();
-	img = (t_img *)ft_calloc(sizeof(t_img), 1);
+	scene = static_scene();
+	img = (t_img *)calloc(sizeof(t_img), 1);
 	if (!img)
-		ft_error_and_exit(3, "Image - ");
+		error_and_exit(3, "Image - ");
 	if (scene->bmp == 1)
 	{
 		img->data = (char *)ft_calloc(sizeof(unsigned char), \
 		(scene->width * scene->height * 4));
 		if (!img->data)
-			ft_error_and_exit(3, "Image - ");
+			error_and_exit(3, "Image - ");
 		img->line_len = 4 * scene->width;
 		img->bpp = 32;
 		return (img);

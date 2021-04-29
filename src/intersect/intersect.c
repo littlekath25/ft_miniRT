@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_intersect.c                                     :+:    :+:            */
+/*   intersect.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
@@ -12,24 +12,24 @@
 
 #include "mini_rt.h"
 
-int	ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
+int	check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 {
 	t_list		*obj_ptr;
 
 	obj_ptr = scene->objects;
-	ft_reset_impact(impact);
+	reset_impact(impact);
 	while (obj_ptr)
 	{
 		if (*((t_obj *)(obj_ptr)->content) == SP)
-			ft_intersect_sphere(ray, impact, (t_sphere *)obj_ptr->content);
+			intersect_sphere(ray, impact, (t_sphere *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == PL)
-			ft_intersect_plane(ray, impact, (t_plane *)obj_ptr->content);
+			intersect_plane(ray, impact, (t_plane *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == TR)
-			ft_intersect_triangle(ray, impact, (t_triangle *)obj_ptr->content);
+			intersect_triangle(ray, impact, (t_triangle *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == SQ)
-			ft_intersect_square(ray, impact, (t_square *)obj_ptr->content);
+			intersect_square(ray, impact, (t_square *)obj_ptr->content);
 		if (*((t_obj *)(obj_ptr)->content) == CY)
-			ft_intersect_cylinder(ray, impact, (t_cylinder *)obj_ptr->content);
+			intersect_cylinder(ray, impact, (t_cylinder *)obj_ptr->content);
 		obj_ptr = obj_ptr->next;
 	}
 	if (impact->intersect == 1)
@@ -37,8 +37,7 @@ int	ft_check_intersect(t_ray *ray, t_impact *impact, t_scene *scene)
 	return (0);
 }
 
-void	ft_shoot_ray(t_img *img, \
-t_ray *ray, t_impact *impact, t_scene *scene)
+void	shoot_ray(t_img *img, t_ray *ray, t_impact *impact, t_scene *scene)
 {
 	int	height;
 	int	width;
@@ -51,9 +50,9 @@ t_ray *ray, t_impact *impact, t_scene *scene)
 		while (width < scene->width)
 		{
 			color = 0;
-			ray = ft_generate_ray(ray, width, height, scene);
-			if (ft_check_intersect(ray, impact, scene))
-				color = ft_shade_object(impact, scene);
+			ray = generate_ray(ray, width, height, scene);
+			if (check_intersect(ray, impact, scene))
+				color = shade_object(impact, scene);
 			my_mlx_pixel_put(img, width, height, color);
 			width++;
 		}
@@ -61,18 +60,18 @@ t_ray *ray, t_impact *impact, t_scene *scene)
 	}
 }
 
-void	ft_make_image(t_img *img, t_scene *scene)
+void	make_image(t_img *img, t_scene *scene)
 {
 	t_ray		*ray;
 	t_impact	*impact;
 
 	ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	if (ray == NULL)
-		ft_error_and_exit(3, "Ray struct - ");
+		error_and_exit(3, "Ray struct - ");
 	impact = (t_impact *)ft_calloc(sizeof(t_impact), 1);
 	if (impact == NULL)
-		ft_error_and_exit(3, "Impact struct - ");
-	ft_shoot_ray(img, ray, impact, scene);
+		error_and_exit(3, "Impact struct - ");
+	shoot_ray(img, ray, impact, scene);
 	free(impact);
 	free(ray);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_bmp.c                                           :+:    :+:            */
+/*   bmp.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
@@ -12,13 +12,13 @@
 
 #include "mini_rt.h"
 
-void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
+void	header_bmp(t_scene *scene, int fd, t_img *img, int size)
 {
 	char				*header;
 
-	header = (char *)ft_calloc(sizeof(unsigned char), BMP_HEADER);
+	header = (char *)calloc(sizeof(unsigned char), BMP_HEADER);
 	if (header == NULL)
-		ft_error_and_exit(3, "BMP Header - ");
+		error_and_exit(3, "BMP Header - ");
 	*((unsigned char *)(header)) = (unsigned char)('B');
 	*((unsigned char *)(header + 1)) = (unsigned char)('M');
 	*((unsigned int *)(header + 2)) = (unsigned int)(size + BMP_HEADER);
@@ -40,14 +40,14 @@ void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
 	free(header);
 }
 
-void	ft_create_bmp(t_scene *scene, t_img *img)
+void	create_bmp(t_scene *scene, t_img *img)
 {
 	int		fd;
 	int		size;
 
 	size = scene->width * scene->height * 4;
 	fd = open("minirt.bmp", O_RDWR | O_CREAT, 0755);
-	ft_header_bmp(scene, fd, img, size);
+	header_bmp(scene, fd, img, size);
 	write(fd, img->data, size);
 	close(fd);
 }

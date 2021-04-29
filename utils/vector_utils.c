@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_vector_math_2.c                                 :+:    :+:            */
+/*   vector_math_2.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
@@ -12,7 +12,7 @@
 
 #include "mini_rt.h"
 
-t_vector	ft_hitpoint(t_vector v1, t_vector v2, double t)
+t_vector	hitpoint(t_vector v1, t_vector v2, double t)
 {
 	t_vector	new;
 
@@ -22,7 +22,7 @@ t_vector	ft_hitpoint(t_vector v1, t_vector v2, double t)
 	return (new);
 }
 
-t_vector	ft_add(t_vector v1, t_vector v2)
+t_vector	add(t_vector v1, t_vector v2)
 {
 	t_vector	new;
 
@@ -32,7 +32,7 @@ t_vector	ft_add(t_vector v1, t_vector v2)
 	return (new);
 }
 
-t_vector	ft_subtract(t_vector v1, t_vector v2)
+t_vector	subtract(t_vector v1, t_vector v2)
 {
 	t_vector	new;
 
@@ -42,7 +42,7 @@ t_vector	ft_subtract(t_vector v1, t_vector v2)
 	return (new);
 }
 
-t_vector	ft_scale(t_vector v1, double scalar)
+t_vector	scale(t_vector v1, double scalar)
 {
 	t_vector	new;
 
@@ -52,7 +52,7 @@ t_vector	ft_scale(t_vector v1, double scalar)
 	return (new);
 }
 
-t_vector	ft_copy_vector(t_vector copy)
+t_vector	copy_vector(t_vector copy)
 {
 	t_vector	new;
 

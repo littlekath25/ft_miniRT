@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_miscellaneous.c                                 :+:    :+:            */
+/*   miscellaneous.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
@@ -12,24 +12,24 @@
 
 #include "mini_rt.h"
 
-void	ft_reset_impact(t_impact *impact)
+void	reset_impact(t_impact *impact)
 {
 	impact->intersect = 0;
 	impact->near = INFINITY;
 	impact->normal = (t_vector){0};
 }
 
-int	ft_close(void)
+int	close_rt(void)
 {
 	exit(1);
 	return (1);
 }
 
-int	ft_key_hook(int keycode, t_mlx *window)
+int	key_hook(int keycode, t_mlx *window)
 {
 	t_scene	*scene;
 
-	scene = ft_static_scene();
+	scene = static_scene();
 	if (keycode == 65307 || keycode == 53)
 		exit(1);
 	if (keycode == 65289 || keycode == 48)
@@ -38,7 +38,7 @@ int	ft_key_hook(int keycode, t_mlx *window)
 			scene->current_cam = scene->current_cam->next;
 		else
 			scene->current_cam = scene->camera;
-		ft_make_image(window->image, scene);
+		make_image(window->image, scene);
 		mlx_put_image_to_window(window->ptr, \
 		window->win, window->image->img, 0, 0);
 	}
@@ -51,7 +51,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	t_scene		*scene;
 	int			i;
 
-	scene = ft_static_scene();
+	scene = static_scene();
 	i = (scene->height - y - 1) * img->line_len + x * img->bpp / 8;
 	if (scene->bmp == 1)
 	{
@@ -65,7 +65,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-t_vector	ft_new_vector(double x, double y, double z)
+t_vector	new_vector(double x, double y, double z)
 {
 	t_vector	new;
 

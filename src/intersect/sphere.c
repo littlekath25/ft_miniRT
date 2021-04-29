@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_sphere.c                                        :+:    :+:            */
+/*   sphere.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
@@ -12,17 +12,17 @@
 
 #include "mini_rt.h"
 
-static double	ft_solve(t_ray *ray, t_sphere *sphere)
+static double	solve(t_ray *ray, t_sphere *sphere)
 {
 	t_quad		quad;
 	double		second;
 	double		t_near;
 	t_vector	len;
 
-	len = ft_subtract(ray->pos, sphere->pos);
-	quad.a = ft_dot_product(ray->dir, ray->dir);
-	quad.b = 2 * ft_dot_product(ray->dir, len);
-	quad.c = ft_dot_product(len, len) - pow(sphere->diameter, 2);
+	len = subtract(ray->pos, sphere->pos);
+	quad.a = dot_product(ray->dir, ray->dir);
+	quad.b = 2 * dot_product(ray->dir, len);
+	quad.c = dot_product(len, len) - pow(sphere->diameter, 2);
 	quad.disc = quad.b * quad.b - 4 * quad.a * quad.c;
 	if (quad.disc < 0)
 		return (INFINITY);
@@ -38,19 +38,18 @@ static double	ft_solve(t_ray *ray, t_sphere *sphere)
 	return (t_near);
 }
 
-void	ft_intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
+void	intersect_sphere(t_ray *ray, t_impact *impact, t_sphere *sphere)
 {
 	double		t_near;
 
-	t_near = ft_solve(ray, sphere);
+	t_near = solve(ray, sphere);
 	if (t_near < impact->near && t_near > RAY_MIN)
 	{
 		impact->intersect = 1;
 		impact->near = t_near;
 		impact->rgb = sphere->colors;
-		impact->hitpoint = ft_hitpoint(ray->pos, ray->dir, impact->near);
-		impact->normal = ft_subtract(impact->hitpoint, sphere->pos);
-		impact->hitpoint = \
-		ft_hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
+		impact->hitpoint = hitpoint(ray->pos, ray->dir, impact->near);
+		impact->normal = subtract(impact->hitpoint, sphere->pos);
+		impact->hitpoint = hitpoint(impact->hitpoint, impact->normal, RAY_MIN);
 	}
 }

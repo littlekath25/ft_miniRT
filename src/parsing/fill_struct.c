@@ -6,13 +6,13 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/06 14:16:38 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/16 21:16:14 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 20:18:28 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int	ft_fill_position(char *position, t_vector *pos_ptr)
+int	fill_position(char *position, t_vector *pos_ptr)
 {
 	char		**pos;
 
@@ -26,7 +26,7 @@ int	ft_fill_position(char *position, t_vector *pos_ptr)
 	return (1);
 }
 
-int	ft_fill_colors(char *colors, t_colors *color_ptr)
+int	fill_colors(char *colors, t_colors *color_ptr)
 {
 	char		**col;
 
@@ -40,7 +40,7 @@ int	ft_fill_colors(char *colors, t_colors *color_ptr)
 	return (1);
 }
 
-int	ft_fill_orientation(char *orientation, t_vector *ori_ptr)
+int	fill_orientation(char *orientation, t_vector *ori_ptr)
 {
 	char		**ori;
 

@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 13:34:56 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 19:30:29 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,42 @@ int	ft_check_argv(int argc, char **argv)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+t_mlx	*ft_render(t_mlx *window, char **argv)
 {
-	t_scene		*scene;
-	t_mlx		*window;
+	t_scene	*scene;
 
 	scene = ft_static_scene();
+	scene = ft_get_scene(argv, scene);
+	if (scene->bmp == 1)
+	{
+		window->image = ft_init_img(window->image, NULL);
+		ft_make_image(window->image, scene);
+		ft_create_bmp(scene, window->image);
+		exit (1);
+	}
+	window = ft_init_mlx(scene);
+	window->image = ft_init_img(window->image, window);
+	ft_make_image(window->image, scene);
+	mlx_put_image_to_window(window->ptr, \
+	window->win, window->image->img, 0, 0);
+	return (window);
+}
+
+static int	ft_close(void)
+{
+	exit(1);
+	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	t_mlx		*window;
+
 	window = NULL;
 	if (ft_check_argv(argc, argv))
-	{
-		scene = ft_get_scene(argv, scene);
-		if (scene->bmp == 1)
-		{
-			window->image = ft_init_img(window->image, NULL);
-			ft_make_image(window->image, scene);
-			ft_create_bmp(scene, window->image);
-			exit (1);
-		}
-		window = ft_init_mlx();
-		window->image = ft_init_img(window->image, window);
-		ft_make_image(window->image, scene);
-		mlx_put_image_to_window(window->ptr, \
-		window->win, window->image->img, 0, 0);
-	}
+		window = ft_render(window, argv);
 	mlx_key_hook(window->win, key_hook, window);
+	mlx_hook(window->win, 33, 1L<<0, ft_close, &window);
 	mlx_loop(window->ptr);
 	exit(1);
 }

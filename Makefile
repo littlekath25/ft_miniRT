@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/29 13:38:04 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/29 17:12:56 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,10 @@ all: $(NAME)
 ifeq ($(UNAME_S),Linux)
 $(NAME): $(OBJ_FILES)
 	cd libft && make
-	cd mlx_linux && make
 	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 else
 $(NAME): $(OBJ_FILES)
 	cd libft && make
-	cd mlx && make
 	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
 endif
 

@@ -6,20 +6,18 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/28 15:54:30 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/29 17:24:45 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-t_mlx	*ft_init_mlx(void)
+t_mlx	*ft_init_mlx(t_scene *scene)
 {
 	t_mlx	*window;
 	int		width;
 	int		height;
-	t_scene	*scene;
 
-	scene = ft_static_scene();
 	window = (t_mlx *)ft_calloc(sizeof(t_mlx), 1);
 	if (!window)
 		ft_error_and_exit(3, "Window - ");
@@ -46,6 +44,8 @@ t_img	*ft_init_img(t_img *img, t_mlx *window)
 	{
 		img->data = (char *)ft_calloc(sizeof(unsigned char), \
 		(scene->width * scene->height * 4));
+		if (!img->data)
+			ft_error_and_exit(3, "Image - ");
 		img->line_len = 4 * scene->width;
 		img->bpp = 32;
 		return (img);

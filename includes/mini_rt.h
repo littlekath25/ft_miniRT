@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 19:25:59 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 19:32:46 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_mlx			*ft_render(t_mlx *window, char **argv);
 
 /* Miscellaneous functions */
 int				ft_error_and_exit(int error, char *prefix);
-int				key_hook(int keycode, t_mlx *window);
-int				mouse_hook(int keycode, t_mlx *window);
+int				ft_key_hook(int keycode, t_mlx *window);
+int				ft_close(void);
 void			my_mlx_pixel_put(t_img *image, int x, int y, int color);
 void			ft_reset_impact(t_impact *impact);
 t_scene			*ft_static_scene(void);

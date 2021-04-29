@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/03/08 17:24:24 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 19:09:08 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 19:33:09 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ void	ft_reset_impact(t_impact *impact)
 	impact->normal = (t_vector){0};
 }
 
-int	key_hook(int keycode, t_mlx *window)
+int	ft_close(void)
+{
+	exit(1);
+	return (1);
+}
+
+int	ft_key_hook(int keycode, t_mlx *window)
 {
 	t_scene	*scene;
 

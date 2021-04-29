@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/28 17:22:19 by kfu           ########   odam.nl          #
+#    Updated: 2021/04/29 13:09:32 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,11 +85,11 @@ OBJ_FILES = $(L_OBJ) $(P_OBJ) $(M_OBJ) $(U_OBJ) $(I_OBJ)
 all: $(NAME)
 
 ifeq ($(UNAME_S),Linux)
-	$(NAME): $(OBJ_FILES)
-		$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
+$(NAME): $(OBJ_FILES)
+	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 else
-	$(NAME): $(OBJ_FILES)
-		$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
+$(NAME): $(OBJ_FILES)
+	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
 endif
 
 %.o: %.c

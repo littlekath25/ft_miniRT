@@ -6,13 +6,13 @@
 /*   By: katherine <katherine@student.codam.nl>       +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/04/18 12:26:53 by katherine     #+#    #+#                 */
-/*   Updated: 2021/04/28 15:47:08 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/29 19:36:46 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-static void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
+void	ft_header_bmp(t_scene *scene, int fd, t_img *img, int size)
 {
 	char				*header;
 

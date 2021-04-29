@@ -6,7 +6,7 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/29 17:12:56 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/29 19:36:04 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,11 @@ CC		= 	gcc
 RM		=	rm -f
 CFLAGS	= 	-Wall -Wextra -Werror -I includes/
 UNAME_S := 	$(shell uname -s)
+
+H_FILES	= 	get_next_line.h		info.h\
+			libft.h				mini_rt.h\
+			mlx_mac.h			mlx.h
+H_PATH	=	includes/
 
 M_SRC	= 	miniRT.c
 M_PATH	=	src/
@@ -54,7 +59,7 @@ $(NAME): $(OBJ_FILES)
 	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
 endif
 
-%.o: %.c
+%.o: %.c $(H_FILES)
 		$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:

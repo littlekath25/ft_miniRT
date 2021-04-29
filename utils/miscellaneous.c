@@ -30,6 +30,11 @@ int	key_hook(int keycode, t_mlx *window)
 	t_scene	*scene;
 
 	scene = static_scene();
+
+	if (LINUX == 1)
+		mlx_hook(window->win, 33, 1L << 0, close_rt, &window);
+	else
+		mlx_hook(window->win, 17, 1L << 17, close_rt, &window);
 	if (keycode == 65307 || keycode == 53)
 		exit(1);
 	if (keycode == 65289 || keycode == 48)

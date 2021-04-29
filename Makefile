@@ -6,14 +6,18 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/29 20:41:10 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/29 22:23:10 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	miniRT
 CC		= 	gcc
 RM		=	rm -f
-CFLAGS	= 	-Wall -Wextra -Werror -I includes/
+FLAGS	= 	-Wall -Wextra -Werror -I includes/
+MACRO	=	-DLINUX=1
+LIBS	=	-Llibft -lft
+MLIB	=	 -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o
+LLIB	=	-Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o
 UNAME_S := 	$(shell uname -s)
 
 H_FILES	= 	get_next_line.h		info.h\
@@ -50,17 +54,19 @@ OBJ_FILES = $(L_OBJ) $(P_OBJ) $(M_OBJ) $(U_OBJ) $(I_OBJ)
 all: $(NAME)
 
 ifeq ($(UNAME_S),Linux)
-$(NAME): $(OBJ_FILES)
-	cd libft && make
-	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
+FLAGS += $(MACRO)
+LIBS += $(LLIB)
 else
-$(NAME): $(OBJ_FILES)
-	cd libft && make
-	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
+LIBS += $(MLIB)
 endif
 
-%.o: %.c $(H_FILES)
-		$(CC) -c $(CFLAGS) -o $@ $<
+$(NAME): $(OBJ_FILES)
+	cd libft && make
+	cp mlx/libmlx.dylib .
+	$(CC) $(OBJ_FILES) $(LIBS) $(NAME)
+
+%.o: %.c
+	$(CC) $(FLAGS) -c -o $@ $<
 
 clean:
 	$(RM) $(OBJ_FILES)

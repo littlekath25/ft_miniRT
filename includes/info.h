@@ -6,12 +6,16 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/28 17:18:51 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/29 21:43:49 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INFO_H
 # define INFO_H
+
+# ifndef LINUX
+#  define LINUX 0
+# endif
 
 # define RAY_MIN 0.00001
 # define BMP_HEADER 54

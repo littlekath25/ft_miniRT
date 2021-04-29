@@ -6,16 +6,16 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/28 17:32:04 by kfu           ########   odam.nl          #
+#    Updated: 2021/04/29 13:32:09 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 		libft.a
 AR =		ar
-H_FILES = 	libft.h
+H_FILES = 	../includes/libft.h
 CC = 		gcc
 RM =		rm -f
-CFLAGS = 	-Wall -Wextra -Werror
+CFLAGS = 	-Wall -Wextra -Werror -I../includes/
 O_FILES = 	$(SRC:.c=.o)
 SRC = 		ft_strlen.c			ft_strchr.c\
 			ft_strdup.c			ft_strjoin.c\
@@ -33,11 +33,11 @@ SRC = 		ft_strlen.c			ft_strchr.c\
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES)
+$(NAME): $(O_FILES)
 	$(AR) rcs $(NAME) $(O_FILES)
 
 %.o: %.c $(H_FILES)
-	$(CC) -c $(CFLAGS) -I /includes/ -o $@ $<
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
 	$(RM) $(O_FILES) $(BO_FILES)

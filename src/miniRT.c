@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/28 19:45:18 by kfu           ########   odam.nl         */
+/*   Updated: 2021/04/29 13:34:56 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	main(int argc, char **argv)
 		mlx_put_image_to_window(window->ptr, \
 		window->win, window->image->img, 0, 0);
 	}
-	printf("DONE\n");
 	mlx_key_hook(window->win, key_hook, window);
 	mlx_loop(window->ptr);
 	exit(1);

@@ -6,14 +6,14 @@
 #    By: kfu <kfu@student.codam.nl>                   +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/11/14 23:09:58 by kfu           #+#    #+#                  #
-#    Updated: 2021/04/29 13:19:36 by katherine     ########   odam.nl          #
+#    Updated: 2021/04/29 13:38:04 by katherine     ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	miniRT
 CC		= 	gcc
 RM		=	rm -f
-CFLAGS	= 	-Wall -Wextra -Werror
+CFLAGS	= 	-Wall -Wextra -Werror -I includes/
 UNAME_S := 	$(shell uname -s)
 
 M_SRC	= 	miniRT.c
@@ -46,19 +46,23 @@ all: $(NAME)
 
 ifeq ($(UNAME_S),Linux)
 $(NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES)  -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
+	cd libft && make
+	cd mlx_linux && make
+	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx_linux -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 else
 $(NAME): $(OBJ_FILES)
-	$(CC) $(OBJ_FILES) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
+	cd libft && make
+	cd mlx && make
+	$(CC) $(OBJ_FILES) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) && cp mlx/libmlx.dylib .
 endif
 
 %.o: %.c
-		$(CC) -c $(CFLAGS) -o $@ $< -I includes/
+		$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
 	$(RM) $(OBJ_FILES)
 
 fclean: clean
-	$(RM) $(NAME) libmlx.dylib
+	$(RM) $(NAME) libmlx.dylib && cd libft && make fclean
 
 re: fclean all

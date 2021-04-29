@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 12:23:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 21:43:49 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 22:33:28 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # ifndef LINUX
 #  define LINUX 0
+# endif
+
+# if LINUX
+#  define ESC 65307
+#  define TAB 65289
+# else
+#  define ESC 53
+#  define TAB 48
 # endif
 
 # define RAY_MIN 0.00001

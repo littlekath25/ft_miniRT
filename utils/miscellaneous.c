@@ -30,14 +30,13 @@ int	key_hook(int keycode, t_mlx *window)
 	t_scene	*scene;
 
 	scene = static_scene();
-
 	if (LINUX == 1)
 		mlx_hook(window->win, 33, 1L << 0, close_rt, &window);
 	else
 		mlx_hook(window->win, 17, 1L << 17, close_rt, &window);
-	if (keycode == 65307 || keycode == 53)
+	if (keycode == ESC)
 		exit(1);
-	if (keycode == 65289 || keycode == 48)
+	if (keycode == TAB)
 	{
 		if (scene->current_cam->next != NULL)
 			scene->current_cam = scene->current_cam->next;

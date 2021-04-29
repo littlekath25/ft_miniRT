@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 20:29:56 by katherine     ########   odam.nl         */
+/*   Updated: 2021/04/29 20:43:04 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,16 @@ int	check_argv(int argc, char **argv)
 t_mlx	*ft_render(t_mlx *window, char **argv)
 {
 	t_scene	*scene;
+	t_img	*bmp;
 
 	scene = static_scene();
 	scene = get_scene(argv, scene);
+	bmp = NULL;
 	if (scene->bmp == 1)
 	{
-		window->image = init_img(window->image, NULL);
-		make_image(window->image, scene);
-		create_bmp(scene, window->image);
+		bmp = init_img(bmp, NULL);
+		make_image(bmp, scene);
+		create_bmp(scene, bmp);
 		exit (1);
 	}
 	window = init_mlx(scene);

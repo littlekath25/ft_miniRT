@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 10:27:51 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 21:24:53 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/01 23:15:51 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ t_scene			*static_scene(void);
 /* Parsing all the elements */
 t_scene			*get_scene(char **argv, t_scene *scene);
 int				read_and_parse(int fd, t_scene *scene);
-int				parse_this_line(t_scene *scene, char **splitted);
-int				parse_resolution(t_scene *scene, char **splitted);
-int				parse_ambient(t_scene *scene, char **splitted);
-int				parse_camera(t_scene *scene, char **splitted);
-int				parse_light(t_scene *scene, char **splitted);
-int				parse_sphere(t_scene *scene, char **splitted);
-int				parse_plane(t_scene *scene, char **splitted);
-int				parse_square(t_scene *scene, char **splitted);
-int				parse_cylinder(t_scene *scene, char **splitted);
-int				parse_triangle(t_scene *scene, char **splitted);
+int				parse_this_line(t_scene *scene, char **splitted, int words);
+int				parse_resolution(t_scene *scene, char **splitted, int words);
+int				parse_ambient(t_scene *scene, char **splitted, int words);
+int				parse_camera(t_scene *scene, char **splitted, int words);
+int				parse_light(t_scene *scene, char **splitted, int words);
+int				parse_sphere(t_scene *scene, char **splitted, int words);
+int				parse_plane(t_scene *scene, char **splitted, int words);
+int				parse_square(t_scene *scene, char **splitted, int words);
+int				parse_cylinder(t_scene *scene, char **splitted, int words);
+int				parse_triangle(t_scene *scene, char **splitted, int words);
 
 /* Error checking while parsing */
 int				check_colors(char *colors);

@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/11 12:17:08 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/20 19:04:14 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/01 23:05:54 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	**fill(char **split, const char *s, char c, int words)
 	return (split);
 }
 
-char	**ft_split(char	const *s, char c)
+char	**ft_split(char	const *s, char c, int *total_words)
 {
 	char	**split;
 	int		words;
@@ -98,5 +98,6 @@ char	**ft_split(char	const *s, char c)
 	if (split == NULL)
 		return (NULL);
 	split = fill(split, s, c, words);
+	*total_words = words;
 	return (split);
 }

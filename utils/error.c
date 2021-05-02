@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/19 14:22:28 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 20:24:51 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/02 09:37:54 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 int	check_orientation(char *orientation)
 {
-	float	x;
-	float	y;
-	float	z;
-	int		ret;
-	char	**ori;
+	t_vector	vec;
+	int			ret;
+	int			words;
+	char		**ori;
 
 	ret = 1;
-	ori = ft_split(orientation, ',');
+	ori = ft_split(orientation, ',', &words);
 	if (ori == NULL)
 		return (-1);
-	x = ft_atof(ori[0]);
-	y = ft_atof(ori[1]);
-	z = ft_atof(ori[2]);
-	if (x < -1 || y < -1 || z < -1 || x > 1 || y > 1 || z > 1)
+	if (words != 3)
+		error_and_exit(0, "Invalid orientation values");
+	vec.x = ft_atof(ori[0]);
+	vec.y = ft_atof(ori[1]);
+	vec.z = ft_atof(ori[2]);
+	if (vec.x < -1 || vec.y < -1 || vec.z < -1 \
+	|| vec.x > 1 || vec.y > 1 || vec.z > 1)
 		ret = 0;
+	if (vec.x + vec.y + vec.z > 1)
+		normalize(&vec);
 	ft_free_split(ori);
 	return (ret);
 }
@@ -38,7 +42,7 @@ int	check_fov(char *fov)
 	float	f;
 
 	f = ft_atof(fov);
-	if (f < 0 || f > 180)
+	if (f < 0 || f >= 180)
 		return (0);
 	return (1);
 }
@@ -55,20 +59,22 @@ int	check_ratio(char *ratio)
 
 int	check_colors(char *colors)
 {
-	int		r;
-	int		g;
-	int		b;
-	int		ret;
-	char	**col;
+	t_colors	color;
+	int			ret;
+	int			words;
+	char		**col;
 
 	ret = 1;
-	col = ft_split(colors, ',');
+	col = ft_split(colors, ',', &words);
 	if (col == NULL)
 		return (-1);
-	r = ft_atoi(col[0]);
-	g = ft_atoi(col[1]);
-	b = ft_atoi(col[2]);
-	if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255)
+	if (words != 3)
+		error_and_exit(0, "Invalid colors values");
+	color.r = ft_atoi(col[0]);
+	color.g = ft_atoi(col[1]);
+	color.b = ft_atoi(col[2]);
+	if (color.r < 0 || color.g < 0 || color.b < 0 \
+	|| color.r > 255 || color.g  > 255 || color.b > 255)
 		ret = 0;
 	ft_free_split(col);
 	return (ret);

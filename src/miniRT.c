@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/18 12:51:09 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 22:23:31 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/01 14:50:39 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ int	main(int argc, char **argv)
 	if (check_argv(argc, argv))
 		window = ft_render(window, argv);
 	mlx_key_hook(window->win, key_hook, window);
+	if (LINUX == 1)
+		mlx_hook(window->win, 33, 1L << 0, close_rt, &window);
+	else
+		mlx_hook(window->win, 17, 1L << 17, close_rt, &window);
 	mlx_loop(window->ptr);
 	exit(1);
 }

@@ -6,18 +6,20 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:21:55 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 20:19:53 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/01 23:15:25 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int	parse_resolution(t_scene *scene, char **splitted)
+int	parse_resolution(t_scene *scene, char **splitted, int words)
 {
 	static int	resolution;
 	int			width;
 	int			height;
 
+	if (words != 3)
+		error_and_exit(0, "Wrong resolution values");
 	if (resolution == 1)
 		error_and_exit(1, "Resolution - ");
 	resolution = 0;
@@ -31,11 +33,13 @@ int	parse_resolution(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_ambient(t_scene *scene, char **splitted)
+int	parse_ambient(t_scene *scene, char **splitted, int words)
 {
 	static int	ambient;
 	char		*category;
 
+	if (words != 3)
+		error_and_exit(0, "Wrong ambient values");
 	category = "Ambient - ";
 	if (ambient == 1)
 		error_and_exit(1, category);
@@ -50,12 +54,14 @@ int	parse_ambient(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_camera(t_scene *scene, char **splitted)
+int	parse_camera(t_scene *scene, char **splitted, int words)
 {
 	t_list		*new_node;
 	t_camera	*camera;
 	char		*category;
 
+	if (words != 4)
+		error_and_exit(0, "Wrong camera values");
 	category = "Camera - ";
 	if (!(check_fov(splitted[3])) || !(check_orientation(splitted[2])))
 		error_and_exit(2, category);
@@ -71,12 +77,14 @@ int	parse_camera(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_light(t_scene *scene, char **splitted)
+int	parse_light(t_scene *scene, char **splitted, int words)
 {
 	t_list	*new_node;
 	t_light	*light;
 	char	*category;
 
+	if (words != 4)
+		error_and_exit(0, "Wrong light values");
 	category = "Light - ";
 	if (!(check_ratio(splitted[2])) || !(check_colors(splitted[3])))
 		error_and_exit(2, category);

@@ -6,21 +6,21 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/25 13:41:17 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 20:30:49 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/01 23:18:40 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int	parse_sphere(t_scene *scene, char **splitted)
+int	parse_sphere(t_scene *scene, char **splitted, int words)
 {
 	t_list		*new_node;
 	t_sphere	*sphere;
 	char		*category;
 
+	if (words != 4)
+		error_and_exit(0, "Wrong sphere values");
 	category = "Sphere - ";
-	if (!(check_colors(splitted[3])))
-		error_and_exit(2, category);
 	sphere = (t_sphere *)ft_calloc(sizeof(t_sphere), 1);
 	new_node = ft_lstnew(sphere);
 	if (!sphere || !new_node)
@@ -33,15 +33,15 @@ int	parse_sphere(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_plane(t_scene *scene, char **splitted)
+int	parse_plane(t_scene *scene, char **splitted, int words)
 {
 	t_list	*new_node;
 	t_plane	*plane;
 	char	*category;
 
+	if (words != 4)
+		error_and_exit(0, "Wrong plane values");
 	category = "Plane - ";
-	if (!(check_orientation(splitted[2])) || !(check_colors(splitted[3])))
-		error_and_exit(2, category);
 	plane = (t_plane *)ft_calloc(sizeof(t_plane), 1);
 	new_node = ft_lstnew(plane);
 	if (!plane || !new_node)
@@ -54,15 +54,15 @@ int	parse_plane(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_square(t_scene *scene, char **splitted)
+int	parse_square(t_scene *scene, char **splitted, int words)
 {
 	t_list		*new_node;
 	t_square	*square;
 	char		*category;
 
+	if (words != 5)
+		error_and_exit(0, "Wrong square values");
 	category = "Square - ";
-	if (!(check_orientation(splitted[2])) || !(check_colors(splitted[4])))
-		error_and_exit(2, category);
 	square = (t_square *)ft_calloc(sizeof(t_square), 1);
 	new_node = ft_lstnew(square);
 	if (!square || !new_node)
@@ -76,15 +76,15 @@ int	parse_square(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_cylinder(t_scene *scene, char **splitted)
+int	parse_cylinder(t_scene *scene, char **splitted, int words)
 {
 	t_list		*new_node;
 	t_cylinder	*cylinder;
 	char		*category;
 
+	if (words != 6)
+		error_and_exit(0, "Wrong cylinder values");
 	category = "Cylinder - ";
-	if (!(check_orientation(splitted[2])) || !(check_colors(splitted[5])))
-		error_and_exit(2, category);
 	cylinder = (t_cylinder *)ft_calloc(sizeof(t_cylinder), 1);
 	new_node = ft_lstnew(cylinder);
 	if (!cylinder || !new_node)
@@ -99,15 +99,15 @@ int	parse_cylinder(t_scene *scene, char **splitted)
 	return (1);
 }
 
-int	parse_triangle(t_scene *scene, char **splitted)
+int	parse_triangle(t_scene *scene, char **splitted, int words)
 {
 	t_list		*new_node;
 	t_triangle	*triangle;
 	char		*category;
 
+	if (words != 5)
+		error_and_exit(0, "Wrong triangle values");
 	category = "Triangle - ";
-	if (!(check_colors(splitted[4])))
-		error_and_exit(2, category);
 	triangle = (t_triangle *)ft_calloc(sizeof(t_triangle), 1);
 	new_node = ft_lstnew(triangle);
 	if (!triangle || !new_node)

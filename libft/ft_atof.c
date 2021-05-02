@@ -6,11 +6,12 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/24 11:37:17 by kfu           #+#    #+#                 */
-/*   Updated: 2021/02/24 15:03:38 by kfu           ########   odam.nl         */
+/*   Updated: 2021/05/01 23:28:02 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static double	calc_float(const char *str, double res, \
 double decimal, int sign)
@@ -34,6 +35,11 @@ double decimal, int sign)
 		}
 		else if (*str == '.')
 			fraction = 1;
+		else
+		{
+			printf("Error\nNot a digit\n");
+			exit (1);
+		}
 		++str;
 	}
 	return (sign * (res + decimal / divisor));

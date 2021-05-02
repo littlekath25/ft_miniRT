@@ -6,35 +6,45 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/02/27 17:14:26 by kfu           #+#    #+#                 */
-/*   Updated: 2021/04/29 20:31:02 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/02 09:32:47 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
 
-int	parse_this_line(t_scene *scene, char **splitted)
+void	check_scene(t_scene *scene)
+{
+	if (scene->width <= 0 || scene->height <= 0)
+		error_and_exit(0, "No resolution");
+	if (scene->camera == NULL)
+		error_and_exit(0, "No camera(s)");
+	if (scene->ambient.ratio == 0)
+		error_and_exit(0, "No ambient");
+}
+
+int	parse_this_line(t_scene *scene, char **splitted, int words)
 {
 	int	ret;
 
 	ret = 0;
 	if (ft_isequal(splitted[0], "R"))
-		ret = parse_resolution(scene, splitted);
+		ret = parse_resolution(scene, splitted, words);
 	if (ft_isequal(splitted[0], "A"))
-		ret = parse_ambient(scene, splitted);
+		ret = parse_ambient(scene, splitted, words);
 	if (ft_isequal(splitted[0], "c"))
-		ret = parse_camera(scene, splitted);
+		ret = parse_camera(scene, splitted, words);
 	if (ft_isequal(splitted[0], "l"))
-		ret = parse_light(scene, splitted);
+		ret = parse_light(scene, splitted, words);
 	if (ft_isequal(splitted[0], "sp"))
-		ret = parse_sphere(scene, splitted);
+		ret = parse_sphere(scene, splitted, words);
 	if (ft_isequal(splitted[0], "pl"))
-		ret = parse_plane(scene, splitted);
+		ret = parse_plane(scene, splitted, words);
 	if (ft_isequal(splitted[0], "sq"))
-		ret = parse_square(scene, splitted);
+		ret = parse_square(scene, splitted, words);
 	if (ft_isequal(splitted[0], "cy"))
-		ret = parse_cylinder(scene, splitted);
+		ret = parse_cylinder(scene, splitted, words);
 	if (ft_isequal(splitted[0], "tr"))
-		ret = parse_triangle(scene, splitted);
+		ret = parse_triangle(scene, splitted, words);
 	if (ret == -1)
 		error_and_exit(0, "Something wrong with parsing");
 	return (1);
@@ -46,6 +56,7 @@ int	read_and_parse(int fd, t_scene *scene)
 	char	**splitted;
 	int		read;
 	int		parse;
+	int		words;
 
 	read = 1;
 	parse = 0;
@@ -57,10 +68,10 @@ int	read_and_parse(int fd, t_scene *scene)
 			free(line);
 			continue ;
 		}
-		splitted = ft_split(line, ' ');
+		splitted = ft_split(line, ' ', &words);
 		if (splitted == NULL)
 			break ;
-		parse = parse_this_line(scene, splitted);
+		parse = parse_this_line(scene, splitted, words);
 		ft_free_split(splitted);
 		free(line);
 		if (read == -1 || parse == -1)
@@ -77,5 +88,6 @@ t_scene	*get_scene(char **argv, t_scene *scene)
 	if (fd == -1)
 		error_and_exit(0, "Could not open file");
 	read_and_parse(fd, scene);
+	check_scene(scene);
 	return (scene);
 }

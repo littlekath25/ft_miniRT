@@ -6,7 +6,7 @@
 /*   By: kfu <kfu@student.codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/10/29 18:46:35 by kfu           #+#    #+#                 */
-/*   Updated: 2021/03/15 15:40:21 by katherine     ########   odam.nl         */
+/*   Updated: 2021/05/01 23:04:09 by katherine     ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char		*ft_strdup(const char *str1);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *str1, char const *str2);
 char		*ft_strtrim(char const *str, char const *set);
-char		**ft_split(char const *s, char c);
+char		**ft_split(char const *s, char c, int *words);
 char		*ft_itoa(int n);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
